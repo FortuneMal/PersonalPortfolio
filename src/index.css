@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 220 26% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 26% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 26% 10%;
+
+    --primary: 193 82% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 92%;
+    --secondary-foreground: 220 26% 10%;
+
+    --muted: 220 14% 92%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 193 82% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 14% 85%;
+    --input: 220 14% 85%;
+    --ring: 193 82% 45%;
+
+    --radius: 0.75rem;
+
+    /* Custom Portfolio Colors */
+    --hero-gradient-from: 210 20% 98%;
+    --hero-gradient-to: 220 30% 92%;
+    --glow: 193 100% 50%;
+    --card-hover: 220 14% 96%;
+    
+    /* Typography */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 220 26% 6%;
+    --foreground: 210 20% 98%;
+
+    --card: 220 24% 10%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 220 26% 8%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 193 82% 58%;
+    --primary-foreground: 220 26% 6%;
+
+    --secondary: 240 20% 18%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 220 20% 15%;
+    --muted-foreground: 215 15% 65%;
+
+    --accent: 193 82% 58%;
+    --accent-foreground: 220 26% 6%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 193 82% 58%;
+
+    /* Custom Portfolio Colors */
+    --hero-gradient-from: 220 26% 6%;
+    --hero-gradient-to: 240 40% 12%;
+    --glow: 193 100% 70%;
+    --card-hover: 220 24% 12%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-glow to-primary bg-clip-text text-transparent;
+  }
+
+  .card-interactive {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:bg-card-hover;
+  }
+
+  .glow-effect {
+    box-shadow: 0 0 30px hsla(var(--glow) / 0.3);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, hsl(var(--hero-gradient-from)), hsl(var(--hero-gradient-to)));
+  }
+
+  /* Button glow effect */
+  .btn-glow {
+    @apply bg-primary text-primary-foreground relative overflow-hidden;
+    box-shadow: 0 0 20px hsla(var(--primary) / 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .btn-glow:hover {
+    box-shadow: 0 0 30px hsla(var(--primary) / 0.6), 0 0 60px hsla(var(--primary) / 0.3);
+    transform: translateY(-2px);
+  }
+
+  /* Card tilt effect */
+  .card-tilt {
+    @apply transition-all duration-300;
+    transform-style: preserve-3d;
+  }
+
+  .card-tilt:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-4px);
+    box-shadow: 0 20px 40px hsla(var(--background) / 0.3), 0 0 20px hsla(var(--primary) / 0.1);
+  }
+}
