@@ -5,7 +5,7 @@ import path from 'path';
 export default defineConfig(({ mode }) => {
   return {
 
-    base: '/PersonalPortfolio/',
+    base: '/',
     
     plugins: [react()],
     
