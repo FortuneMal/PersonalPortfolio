@@ -5,25 +5,19 @@ import { Card } from "@/components/ui/card";
 const Projects = () => {
   const projects = [
     {
-      title: "Project Alpha",
-      description: "A modern web application built with React and TypeScript, featuring real-time data synchronization.",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Firebase"],
-      github: "https://github.com",
-      demo: "https://demo.com",
+      title: "BudgetEase",
+      description: "BudgetEase is a full-stack personal finance management application designed to help users track expenses, set budgets, and manage savings goals. It provides a clear overview of financial activity, enabling users to make informed decisions about their spending and savings habits.",
+      technologies: ["React", "HTML", "TailwindCSS", "MongoDB", "Node.js"],
+      github: "https://github.com/FortuneMal/BudgetEasev2",
+      demo: "https://fortunemal.github.io/BudgetEasev2/",
     },
+    
     {
-      title: "Cloud Infrastructure Tool",
-      description: "DevOps automation tool for managing cloud resources across multiple providers.",
-      technologies: ["Python", "AWS", "Docker", "Terraform"],
-      github: "https://github.com",
-      demo: "",
-    },
-    {
-      title: "API Gateway Service",
-      description: "High-performance API gateway with rate limiting, authentication, and monitoring.",
-      technologies: ["Node.js", "Express", "Redis", "MongoDB"],
-      github: "https://github.com",
-      demo: "https://demo.com",
+      title: "MercuryAI",
+      description: "MercuryAI is an AI-powered portfolio assistant that helps users generate professional bios, project summaries, and learning reflections for their portfolios. The app features a tabbed interface, tone selection, and persistent storage of generated outputs. It uses Google Gemini for content generation via a secure backend API proxy.",
+      technologies: ["React", "HTML", "CSS"],
+      github: "https://github.com/FortuneMal/MercuryAI",
+      demo: "https://cdfkns.github.io/MercuryAI/",
     },
   ];
 

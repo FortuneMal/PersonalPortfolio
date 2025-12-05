@@ -57,14 +57,14 @@ const Index = () => {
 
               <div className="flex gap-4 pt-4">
                 <a 
-                  href="mailto:fortune@example.com"
+                  href="mailto:fmalaza512@gmail.com"
                   className="p-3 rounded-lg bg-secondary hover:bg-card-hover transition-all hover:scale-110"
                   aria-label="Email"
                 >
                   <Mail className="w-5 h-5" />
                 </a>
                 <a 
-                  href="https://github.com"
+                  href="https://github.com/FortuneMal"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 rounded-lg bg-secondary hover:bg-card-hover transition-all hover:scale-110"
@@ -73,7 +73,7 @@ const Index = () => {
                   <Github className="w-5 h-5" />
                 </a>
                 <a 
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/mphikeleli-malaza-5b386a253"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 rounded-lg bg-secondary hover:bg-card-hover transition-all hover:scale-110"
@@ -139,10 +139,10 @@ const Index = () => {
               <Mail className="w-8 h-8 mx-auto mb-4 text-primary" />
               <h3 className="font-bold mb-2">Email</h3>
               <a 
-                href="mailto:fortune@example.com"
+                href="mailto:fmalaza512@gmail.com"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                fortune@example.com
+                fmalaza512@gmail.com
               </a>
             </Card>
 
@@ -150,12 +150,12 @@ const Index = () => {
               <Github className="w-8 h-8 mx-auto mb-4 text-primary" />
               <h3 className="font-bold mb-2">GitHub</h3>
               <a 
-                href="https://github.com"
+                href="https://github.com/FortuneMal"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                github.com/fortune
+                github.com/FortuneMal
               </a>
             </Card>
 
@@ -163,12 +163,12 @@ const Index = () => {
               <Linkedin className="w-8 h-8 mx-auto mb-4 text-primary" />
               <h3 className="font-bold mb-2">LinkedIn</h3>
               <a 
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/mphikeleli-malaza-5b386a253"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                linkedin.com/in/fortune
+                linkedin.com/in/mphikeleli-malaza
               </a>
             </Card>
           </div>
