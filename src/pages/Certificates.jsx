@@ -5,28 +5,34 @@ import { Badge } from "@/components/ui/badge";
 const Certificates = () => {
   const certificates = [
     {
-      title: "AWS Certified Solutions Architect",
-      issuer: "Amazon Web Services",
-      date: "2024",
-      category: "Cloud",
+      title: "Agile with Atlassian Jira",
+      issuer: "Atlassian",
+      date: "2025",
+      category: "Agile",
     },
     {
       title: "Software Engineering Certificate",
       issuer: "ALX Africa",
-      date: "2023",
+      date: "2025",
       category: "Software Development",
     },
     {
-      title: "Docker Certified Associate",
-      issuer: "Docker",
-      date: "2024",
-      category: "DevOps",
+      title: "Generative AI with Large Language Models",
+      issuer: "Amazon Web Services (AWS)",
+      date: "2025",
+      category: "Gen AI",
     },
     {
-      title: "Kubernetes Administrator (CKA)",
-      issuer: "Cloud Native Computing Foundation",
-      date: "2024",
-      category: "DevOps",
+      title: "Microsoft Power Platform Fundamentals",
+      issuer: "Microsoft",
+      date: "2025",
+      category: "Power Platform",
+    },
+    {
+      title: "Python Project for Data Engineering",
+      issuer: "IBM",
+      date: "2025",
+      category: "Data Engineering",
     },
   ];
 

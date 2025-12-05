@@ -3,6 +3,9 @@ import { Card } from "@/components/ui/card";
 import { Download, Briefcase, GraduationCap, Award, Code } from "lucide-react";
 
 const Resume = () => {
+  // Define the path to your CV PDF file
+  const CV_DOWNLOAD_PATH = "/SoftwareEngineeringCV.pdf";
+
   const resumeSections = [
     {
       icon: GraduationCap,
@@ -11,12 +14,17 @@ const Resume = () => {
         {
           title: "ALX Africa Software Engineering Program",
           subtitle: "Full Stack Development",
-          period: "2023 - Present",
+          period: "2023 - 2025",
         },
         {
-          title: "Self-Directed Learning",
-          subtitle: "Cloud Computing & DevOps",
-          period: "Ongoing",
+          title: "National Senior Certificate",
+          subtitle: "High School",
+          period: "2021",
+        },
+        {
+          title: "Microsoft AI Fluency Program",
+          subtitle: "Gen AI basic course",
+          period: "2025",
         },
       ],
     },
@@ -25,14 +33,9 @@ const Resume = () => {
       title: "Experience",
       items: [
         {
-          title: "Software Engineering Projects",
-          subtitle: "Full Stack Development",
-          period: "Various",
-        },
-        {
-          title: "Open Source Contributions",
-          subtitle: "Community Projects",
-          period: "Ongoing",
+          title: "Videographer & Editor",
+          subtitle: "Volunteer at Church",
+          period: "2022 - Present",
         },
       ],
     },
@@ -42,12 +45,17 @@ const Resume = () => {
       items: [
         {
           title: "Languages",
-          subtitle: "JavaScript, TypeScript, Python, Go, C/C++",
+          subtitle: "JavaScript, Python, C/C++, Shell",
           period: "",
         },
         {
           title: "Cloud & DevOps",
-          subtitle: "AWS, GCP, Docker, Kubernetes, CI/CD",
+          subtitle: "AWS, Azure, Docker, Kubernetes",
+          period: "",
+        },
+        {
+          title: "Frameworks & Databases",
+          subtitle: "React, Node.js, TailwindCSS, MongoDB, PostgreSQL",
           period: "",
         },
       ],
@@ -57,14 +65,24 @@ const Resume = () => {
       title: "Certifications",
       items: [
         {
-          title: "Cloud Certifications",
-          subtitle: "AWS, Google Cloud Platform",
-          period: "2024",
+          title: "Agile with Atlassian Jira",
+          subtitle: "Agile Project Management",
+          period: "2025",
         },
         {
-          title: "Development Certifications",
-          subtitle: "Full Stack, DevOps",
-          period: "2024",
+          title: "Generative AI with LLMs",
+          subtitle: "Coursera/DeepLearning.AI Specialization",
+          period: "2025",
+        },
+        {
+          title: "Microsoft Power Platform Fundamentals",
+          subtitle: "Power Platform Development",
+          period: "2025",
+        },
+        {
+          title: "Python Project for Data Engineering",
+          subtitle: "Data Engineering/IBM",
+          period: "2025",
         },
       ],
     },
@@ -84,9 +102,16 @@ const Resume = () => {
           <Button
             size="lg"
             className="btn-glow group"
+            asChild
           >
-            <Download className="mr-2 w-5 h-5 group-hover:animate-bounce" />
-            Download Full CV
+            <a 
+              href={CV_DOWNLOAD_PATH}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Download className="mr-2 w-5 h-5 group-hover:animate-bounce" />
+              Download Full CV
+            </a>
           </Button>
         </div>
 
@@ -140,9 +165,16 @@ const Resume = () => {
           <Button
             size="lg"
             className="btn-glow"
+            asChild
           >
-            <Download className="mr-2 w-5 h-5" />
-            Download Full CV (PDF)
+            <a 
+              href={CV_DOWNLOAD_PATH}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Download className="mr-2 w-5 h-5" />
+              Download Full CV (PDF)
+            </a>
           </Button>
         </Card>
       </div>

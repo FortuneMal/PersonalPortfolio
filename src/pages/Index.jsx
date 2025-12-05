@@ -38,10 +38,14 @@ const Index = () => {
                   className="border-primary/50 hover:bg-primary/10 hover:border-primary transition-all"
                   asChild
                 >
-                  <Link to="/resume">
+                  <a 
+                      href="/SoftwareEngineeringCV.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                  >
                     <Download className="mr-2 w-4 h-4" />
                     Download Resume
-                  </Link>
+                  </a>
                 </Button>
                 <Button 
                   size="lg" 
