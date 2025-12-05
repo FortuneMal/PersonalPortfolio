@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Navigation from "./components/Navigation";
 import Chatbot from "./components/Chatbot";
+import Footer from "./components/Footer"; 
 import Index from "./pages/Index";
 import Projects from "./pages/Projects";
 import Certificates from "./pages/Certificates";
@@ -21,7 +22,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter> 
+        <BrowserRouter basename="/PersonalPortfolio"> 
           <Navigation />
           <Routes>
             <Route path="/" element={<Index />} />
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/resume" element={<Resume />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Footer /> 
           <Chatbot />
         </BrowserRouter>
       </TooltipProvider>

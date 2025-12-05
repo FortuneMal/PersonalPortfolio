@@ -97,7 +97,8 @@ const Index = () => {
                     <img
                       src="/profile.jpg"
                       alt="Fortune Malaza Profile Picture"
-                      className="w-full h-full object-cover rounded-2xl"
+                      // CHANGED: Removed redundant 'rounded-2xl' from here
+                      className="w-full h-full object-cover" 
                     />
                     
                   </div>
