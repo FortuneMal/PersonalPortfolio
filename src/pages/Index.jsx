@@ -88,11 +88,14 @@ const Index = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary to-glow rounded-3xl blur-3xl opacity-20"></div>
                 <Card className="relative p-8 border-border bg-card/50 backdrop-blur">
-                  <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                    <User className="w-32 h-32 text-primary/50" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <p className="text-muted-foreground text-sm">Profile Picture</p>
-                    </div>
+                  <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center overflow-hidden">
+                    
+                    <img
+                      src="/profile.jpg"
+                      alt="Fortune Malaza Profile Picture"
+                      className="w-full h-full object-cover rounded-2xl"
+                    />
+                    
                   </div>
                 </Card>
               </div>
