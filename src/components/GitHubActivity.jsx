@@ -51,7 +51,8 @@ const GitHubActivity = () => {
 
   const contributions = generateContributionData();
 
-  const getContributionColor = (level: number) => {
+  // 🟢 FIXED LINE 54: Removed type annotation (: number)
+  const getContributionColor = (level) => {
     const colors = [
       "bg-secondary",
       "bg-primary/20",
@@ -130,7 +131,7 @@ const GitHubActivity = () => {
               <GitCommit className="w-5 h-5 text-primary" />
               <h3 className="font-semibold text-foreground">Recent Commits</h3>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               {recentCommits.map((commit, index) => (
                 <div
                   key={index}

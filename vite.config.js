@@ -1,13 +1,19 @@
-import { defineConfig } from 'vite'; // The 'type UserConfig' part is removed
-import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite'; 
+import react from '@vitejs/plugin-react-swc';
+import path from 'path';
 
 export default defineConfig(({ mode }) => {
-  // The function should return the configuration object directly,
-  // without any type assignment.
   return {
     plugins: [react()],
-    // Example: Remove 'base: mode === "production" ? "/my-portfolio/" : "/"' if not needed,
-    // or keep it if it is standard configuration logic.
-    // ... Add back your necessary configuration here ...
+    
+    resolve: {
+      alias: {
+        // This maps '@' to the absolute path of your './src' directory
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
+    
+    // Example: You can add other configurations here (like 'base') if needed.
+    // base: mode === "production" ? "/my-portfolio/" : "/",
   };
 });

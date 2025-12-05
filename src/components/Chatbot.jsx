@@ -5,21 +5,16 @@ import { Input } from "@/components/ui/input";
 import { MessageCircle, X, Send, Bot, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-}
-
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
+  const [messages, setMessages] = useState([
     {
       role: "assistant",
       content: "Hi! I'm Fortune's portfolio assistant. Ask me about projects, certificates, or how to download the resume!",
     },
   ]);
   const [input, setInput] = useState("");
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef(null);
   const navigate = useNavigate();
 
   const scrollToBottom = () => {
@@ -30,7 +25,7 @@ const Chatbot = () => {
     scrollToBottom();
   }, [messages]);
 
-  const getResponse = (userMessage: string): string => {
+  const getResponse = (userMessage) => {
     const lowerMessage = userMessage.toLowerCase();
 
     if (lowerMessage.includes("project")) {
@@ -71,7 +66,7 @@ const Chatbot = () => {
   const handleSend = () => {
     if (!input.trim()) return;
 
-    const userMessage: Message = { role: "user", content: input };
+    const userMessage = { role: "user", content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
 
@@ -81,7 +76,7 @@ const Chatbot = () => {
     }, 500);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSend();
     }
