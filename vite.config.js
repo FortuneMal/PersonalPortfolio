@@ -4,6 +4,9 @@ import path from 'path';
 
 export default defineConfig(({ mode }) => {
   return {
+
+    base: '/PersonalPortfolio/',
+    
     plugins: [react()],
     
     resolve: {
