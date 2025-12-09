@@ -45,11 +45,11 @@ const Chatbot = () => {
 
     if (lowerMessage.includes("skill") || lowerMessage.includes("language") || lowerMessage.includes("tech")) {
       setTimeout(() => navigate("/languages"), 1500);
-      return "Fortune is skilled in JavaScript, TypeScript, Python, Go, and various cloud platforms. Check out the Skills page for more details! 💻";
+      return "Fortune is skilled in JavaScript, HTML, Python, and various cloud platforms. Check out the Skills page for more details! 💻";
     }
 
     if (lowerMessage.includes("contact") || lowerMessage.includes("email") || lowerMessage.includes("reach")) {
-      return "You can reach Fortune via email at fortune@example.com, on GitHub, or LinkedIn. Check the Contact section on the homepage! 📧";
+      return "You can reach Fortune via email at fmalaza512@gmail.com, on GitHub, or LinkedIn. Check the Contact section on the homepage! 📧";
     }
 
     if (lowerMessage.includes("hello") || lowerMessage.includes("hi") || lowerMessage.includes("hey")) {
