@@ -9,7 +9,7 @@ const Projects = () => {
       description: "BudgetEase is a full-stack personal finance management application designed to help users track expenses, set budgets, and manage savings goals. It provides a clear overview of financial activity, enabling users to make informed decisions about their spending and savings habits.",
       technologies: ["React", "HTML", "TailwindCSS", "MongoDB", "Node.js"],
       github: "https://github.com/FortuneMal/BudgetEasev2",
-      demo: "https://fortunemal.github.io/BudgetEasev2/",
+      demo: "https://budget-easev2-git-main-fortunemals-projects.vercel.app/",
     },
     
     {
