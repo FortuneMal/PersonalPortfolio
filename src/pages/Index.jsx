@@ -39,7 +39,7 @@ const Index = () => {
                   asChild
                 >
                   <a 
-                      href="/SoftwareEngineeringCV.pdf"
+                      href="/AI Engineering CV.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
                   >
