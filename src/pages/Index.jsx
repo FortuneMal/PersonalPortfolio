@@ -115,10 +115,7 @@ const Index = () => {
           <Card className="p-8 md:p-12 border-border bg-card animate-fade-in">
             <h2 className="text-3xl font-bold mb-6 gradient-text">About Me</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I am someone who loves learning, creating and connecting with people. 
-              Tech is my craft, but growth and purpose are my fuel. I started my 
-              engineering journey at ALX Africa — the first place that taught me 
-              grit and resilience.
+              I’m someone who loves learning, creating, and connecting with people. Technology is my craft, but growth and purpose are what fuel me. My engineering journey began at ALX Africa, where I developed grit and resilience. I’m currently focused on AI engineering, using AI models and agents to turn innovative ideas into practical projects. I also have a background in data and cloud engineering, which allows me to build efficient, scalable solutions. I’m driven by a constant desire to learn and improve so I can work smarter and more effectively.
             </p>
           </Card>
         </div>
