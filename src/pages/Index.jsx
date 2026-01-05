@@ -17,7 +17,7 @@ const Index = () => {
                   <span className="gradient-text">Fortune Malaza</span>
                 </h1>
                 <h2 className="text-2xl md:text-3xl text-muted-foreground mb-6">
-                  Aspiring Software & Cloud Engineer
+                  AI & Software Engineer
                 </h2>
               </div>
 
