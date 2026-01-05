@@ -19,6 +19,13 @@ const Projects = () => {
       github: "https://github.com/FortuneMal/MercuryAI",
       demo: "https://cdfkns.github.io/MercuryAI/",
     },
+    {
+      title: "Eye-Spend",
+      description: "AI Expense Guardian: Real-time Receipt Audit and Risk PredictionProject OverviewThe AI Expense Guardian is a modern, responsive web application built with Streamlit and deployed using Docker and OpenShift.",
+      technologies: ["Python", "Streamlit", "Dockerfile", "OpenShift"],
+      github: "https://github.com/FortuneMal/Eye-Spend",
+      demo: "https://eyespendai.streamlit.app/",
+    },
   ];
 
   return (
