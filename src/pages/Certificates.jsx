@@ -21,7 +21,7 @@ const Certificates = () => {
       issuer: "ALX Africa",
       date: "2025",
       category: "Software Development",
-      pdfUrl: "/ALX Software Engineering Certificate.pdf",
+      pdfUrl: "/ALX Africa Software Engineering.pdf",
       link: "#"
     },
     {
@@ -45,7 +45,7 @@ const Certificates = () => {
       issuer: "IBM",
       date: "2025",
       category: "Data Engineering",
-      pdfUrl: "/Python Project for Data Engineering.pdf",
+      pdfUrl: "/Python Project For Data Engineering.pdf",
       link: "#"
     },
     {
