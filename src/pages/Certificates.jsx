@@ -12,7 +12,8 @@ const Certificates = () => {
       issuer: "Atlassian",
       date: "2025",
       category: "Agile",
-      pdfUrl: "/public/Agile with Atlassian Jira.pdf", 
+      // Removed "/public" from the start of all paths
+      pdfUrl: "/Agile with Atlassian Jira.pdf", 
       link: "#"
     },
     {
@@ -20,7 +21,7 @@ const Certificates = () => {
       issuer: "ALX Africa",
       date: "2025",
       category: "Software Development",
-      pdfUrl: "/public/ALX Software Engineering Certificate.pdf",
+      pdfUrl: "/ALX Software Engineering Certificate.pdf",
       link: "#"
     },
     {
@@ -28,7 +29,7 @@ const Certificates = () => {
       issuer: "Amazon Web Services (AWS)",
       date: "2025",
       category: "Gen AI",
-      pdfUrl: "/public/Generative AI with Large Language Models.pdf",
+      pdfUrl: "/Generative AI with Large Language Models.pdf",
       link: "#"
     },
     {
@@ -36,7 +37,7 @@ const Certificates = () => {
       issuer: "Microsoft",
       date: "2025",
       category: "Power Platform",
-      pdfUrl: "/public/Microsoft Power Platform Fundamentals.pdf",
+      pdfUrl: "/Microsoft Power Platform Fundamentals.pdf",
       link: "#"
     },
     {
@@ -44,7 +45,7 @@ const Certificates = () => {
       issuer: "IBM",
       date: "2025",
       category: "Data Engineering",
-      pdfUrl: "/public/Python Project for Data Engineering.pdf",
+      pdfUrl: "/Python Project for Data Engineering.pdf",
       link: "#"
     },
     {
@@ -52,7 +53,7 @@ const Certificates = () => {
       issuer: "Amazon Web Services (AWS)",
       date: "2025",
       category: "Cloud Engineering",
-      pdfUrl: "/public/AWS Cloud Practitioner Essentials.pdf",
+      pdfUrl: "/AWS Cloud Practitioner Essentials.pdf",
       link: "#"
     },
     {
@@ -60,7 +61,7 @@ const Certificates = () => {
       issuer: "IBM",
       date: "2025",
       category: "Cloud Engineering",
-      pdfUrl: "/public/Containers with Docker, Kubernetes and Openshift.pdf",
+      pdfUrl: "/Containers with Docker, Kubernetes and Openshift.pdf",
       link: "#"
     },
     {
@@ -68,7 +69,7 @@ const Certificates = () => {
       issuer: "AWS",
       date: "2025",
       category: "Cloud Engineering",
-      pdfUrl: "/public/DevOps on AWS Code, Build, and Test.pdf",
+      pdfUrl: "/DevOps on AWS Code, Build, and Test.pdf",
       link: "#"
     },
     {
@@ -76,7 +77,7 @@ const Certificates = () => {
       issuer: "IBM",
       date: "2025",
       category: "Data Engineering",
-      pdfUrl: "/public/Introduction to Data Engineering.pdf",
+      pdfUrl: "/Introduction to Data Engineering.pdf",
       link: "#"
     },
     {
@@ -84,7 +85,7 @@ const Certificates = () => {
       issuer: "Google Cloud",
       date: "2025",
       category: "Gen AI",
-      pdfUrl: "/public/Introduction to Generative AI.pdf",
+      pdfUrl: "/Introduction to Generative AI.pdf",
       link: "#"
     },
     {
@@ -92,7 +93,7 @@ const Certificates = () => {
       issuer: "Atlassian",
       date: "2025",
       category: "Agile",
-      pdfUrl: "/public/Version Control with Git.pdf",
+      pdfUrl: "/Version Control with Git.pdf",
       link: "#"
     },
   ];
@@ -153,7 +154,7 @@ const Certificates = () => {
 
         {/* Certificate Modal */}
         {selectedCert && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm animate-in fade-in duration-200">
             <div 
               className="relative bg-card border border-border rounded-2xl max-w-5xl w-full h-[85vh] overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col"
               onClick={(e) => e.stopPropagation()}
@@ -191,7 +192,7 @@ const Certificates = () => {
               {/* Modal Body (PDF Viewer) */}
               <div className="flex-1 bg-neutral-900 relative">
                 <iframe
-                  src={`${selectedCert.pdfUrl}#toolbar=0&navpanes=0&scrollbar=0`}
+                  src={selectedCert.pdfUrl}
                   className="w-full h-full border-none"
                   title={selectedCert.title}
                 />
@@ -199,14 +200,6 @@ const Certificates = () => {
 
               {/* Modal Footer */}
               <div className="p-4 border-t border-border flex justify-center gap-4 bg-muted/30">
-                <a 
-                  href={selectedCert.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-xl font-semibold hover:opacity-90 transition-all hover:shadow-lg active:scale-95"
-                >
-                  Verify Credential <ExternalLink className="w-4 h-4" />
-                </a>
                 <button 
                   onClick={() => setSelectedCert(null)}
                   className="px-6 py-2.5 rounded-xl border border-border font-semibold hover:bg-muted transition-colors"
