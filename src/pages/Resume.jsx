@@ -35,7 +35,14 @@ const Resume = () => {
         {
           title: "Videographer & Editor",
           subtitle: "Volunteer at Church",
+          company: "Hope Restoration Ministries",
           period: "2022 - Present",
+        },
+        {
+          title: "Digital Engineering Associate",
+          subtitle: "Internship Program",
+          company: "Project Y x Capaciti",
+          period: "2025 - Present",
         },
       ],
     },
