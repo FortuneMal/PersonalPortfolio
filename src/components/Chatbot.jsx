@@ -6,10 +6,6 @@ import { MessageCircle, X, Send, Bot, User, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Initialize Gemini API
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,6 +18,9 @@ const Chatbot = () => {
   const [input, setInput] = useState("");
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
+
+  // Initialize API safely inside the component or check for existence
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -42,9 +41,8 @@ const Chatbot = () => {
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
-    // 1. Safety check for the API key
-    if (!API_KEY) {
-      setMessages((prev) => [...prev, { role: "assistant", content: "Error: API Key is missing. Check Vercel Environment Variables." }]);
+    if (!apiKey) {
+      setMessages((prev) => [...prev, { role: "assistant", content: "⚠️ Error: API Key missing in Vercel. Check Environment Variables." }]);
       return;
     }
 
@@ -54,12 +52,15 @@ const Chatbot = () => {
     setIsLoading(true);
 
     try {
-      // 2. Using 'gemini-1.5-flash' - highly compatible with Free Tier
+      const genAI = new GoogleGenerativeAI(apiKey);
+      
+      // FIX: Use the stable model name. "latest" suffixes often cause 404s.
       const model = genAI.getGenerativeModel({ 
-        model: "gemini-1.5-flash-latest", // Use this string exactly
-        systemInstruction: "You are Fortune Malaza's Portfolio Assistant. Fortune is a Software & Cloud Engineer. Help users navigate. If they ask for projects, use /projects; for certificates, use /certificates; for resume, use /resume; for skills, use /languages."
+        model: "gemini-1.5-flash", 
+        systemInstruction: "You are Fortune Malaza's Portfolio Assistant. Help users navigate. If they ask for projects, use /projects; for certificates, use /certificates; for resume, use /resume; for skills, use /languages."
       });
 
+      // FIX: Filter history to ensure it starts with 'user'
       const history = messages
         .filter((msg, index) => index !== 0) 
         .map((msg) => ({
@@ -75,15 +76,12 @@ const Chatbot = () => {
       setTimeout(() => handleNavigation(responseText), 1000);
 
     } catch (error) {
-      console.error("Gemini Detailed Error:", error);
+      console.error("Gemini Error:", error);
+      let errorMsg = "Sorry, I hit a snag.";
+      if (error.message.includes("404")) errorMsg = "Error: Model not found. Please redeploy.";
+      if (error.message.includes("401") || error.message.includes("403")) errorMsg = "Error: Access denied. Check API Key.";
       
-      // 3. Extracting the real error message for the UI
-      let errorMessage = "Sorry, I hit a snag.";
-      if (error.message?.includes("404")) errorMessage = "Error 404: Model not found. Try changing model to 'gemini-1.5-flash'.";
-      if (error.message?.includes("429")) errorMessage = "I'm a bit overwhelmed! (Rate limit reached). Please wait a minute.";
-      if (error.message?.includes("403")) errorMessage = "Permission Denied: Check if your API key is restricted or invalid.";
-
-      setMessages((prev) => [...prev, { role: "assistant", content: errorMessage }]);
+      setMessages((prev) => [...prev, { role: "assistant", content: errorMsg }]);
     } finally {
       setIsLoading(false);
     }
@@ -111,7 +109,7 @@ const Chatbot = () => {
             </div>
             <div>
               <h3 className="font-semibold">Fortune AI</h3>
-              <p className="text-xs text-muted-foreground">Powered by Gemini</p>
+              <p className="text-xs text-muted-foreground">Online</p>
             </div>
           </div>
 
@@ -132,7 +130,7 @@ const Chatbot = () => {
                   <Loader2 className="w-4 h-4 animate-spin text-primary" />
                 </div>
                 <div className="bg-secondary p-3 rounded-2xl text-xs text-muted-foreground italic">
-                  Fortune AI is thinking...
+                  Thinking...
                 </div>
               </div>
             )}
