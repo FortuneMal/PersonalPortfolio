@@ -9,6 +9,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  // Defaulting to the most compatible model ID
+  const [modelName, setModelName] = useState("gemini-1.5-flash-001");
   const [messages, setMessages] = useState([
     {
       role: "assistant",
@@ -19,7 +21,6 @@ const Chatbot = () => {
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
 
-  // Initialize API safely inside the component or check for existence
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
   const scrollToBottom = () => {
@@ -29,6 +30,35 @@ const Chatbot = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // SELF-HEALING: Check which models are actually available to this key
+  useEffect(() => {
+    if (!apiKey) return;
+    const checkModels = async () => {
+      try {
+        // We use the same SDK to fetch the available model list
+        const genAI = new GoogleGenerativeAI(apiKey);
+        // This is a direct fetch to the API to see what's allowed
+        const response = await fetch(
+          `https://generativelanguage.googleapis.com/v1/models?key=${apiKey}`
+        );
+        const data = await response.json();
+        
+        if (data.models) {
+          console.log("✅ AVAILABLE MODELS:", data.models.map(m => m.name));
+          // If the fancy 1.5 flash isn't there, fallback to 'gemini-pro'
+          const hasFlash = data.models.some(m => m.name.includes("gemini-1.5-flash"));
+          if (!hasFlash) {
+            console.warn("⚠️ 1.5 Flash not found. Falling back to gemini-pro");
+            setModelName("gemini-pro");
+          }
+        }
+      } catch (e) {
+        console.error("Model check failed:", e);
+      }
+    };
+    checkModels();
+  }, [apiKey]);
 
   const handleNavigation = (text) => {
     const lowerText = text.toLowerCase();
@@ -42,7 +72,7 @@ const Chatbot = () => {
     if (!input.trim() || isLoading) return;
 
     if (!apiKey) {
-      setMessages((prev) => [...prev, { role: "assistant", content: "⚠️ Error: API Key missing in Vercel. Check Environment Variables." }]);
+      setMessages((prev) => [...prev, { role: "assistant", content: "⚠️ Error: API Key missing in Vercel. Please redeploy." }]);
       return;
     }
 
@@ -54,21 +84,28 @@ const Chatbot = () => {
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
       
-      // FIX: Use the stable model name. "latest" suffixes often cause 404s.
+      // FIX: Force API version v1 and use specific model ID
       const model = genAI.getGenerativeModel({ 
-        model: "gemini-1.5-flash", 
-        systemInstruction: "You are Fortune Malaza's Portfolio Assistant. Help users navigate. If they ask for projects, use /projects; for certificates, use /certificates; for resume, use /resume; for skills, use /languages."
+        model: modelName, 
+      }, { apiVersion: 'v1' });
+
+      // Configuration for the chat
+      const chat = model.startChat({
+        history: messages
+          .filter((msg, index) => index !== 0)
+          .map((msg) => ({
+            role: msg.role === "user" ? "user" : "model",
+            parts: [{ text: msg.content }],
+          })),
+        generationConfig: {
+          maxOutputTokens: 500,
+        },
+        systemInstruction: {
+          role: "system",
+          parts: [{ text: "You are Fortune Malaza's Portfolio Assistant. Help users navigate. If they ask for projects, use /projects; for certificates, use /certificates; for resume, use /resume; for skills, use /languages." }]
+        }
       });
 
-      // FIX: Filter history to ensure it starts with 'user'
-      const history = messages
-        .filter((msg, index) => index !== 0) 
-        .map((msg) => ({
-          role: msg.role === "user" ? "user" : "model",
-          parts: [{ text: msg.content }],
-        }));
-
-      const chat = model.startChat({ history });
       const result = await chat.sendMessage(input);
       const responseText = await result.response.text();
 
@@ -76,10 +113,10 @@ const Chatbot = () => {
       setTimeout(() => handleNavigation(responseText), 1000);
 
     } catch (error) {
-      console.error("Gemini Error:", error);
+      console.error("Gemini Critical Error:", error);
       let errorMsg = "Sorry, I hit a snag.";
-      if (error.message.includes("404")) errorMsg = "Error: Model not found. Please redeploy.";
-      if (error.message.includes("401") || error.message.includes("403")) errorMsg = "Error: Access denied. Check API Key.";
+      if (error.message.includes("404")) errorMsg = `Error: Model '${modelName}' not found. Check console for available list.`;
+      if (error.message.includes("403")) errorMsg = "Error: API Key is valid but restricted. Check Google AI Studio.";
       
       setMessages((prev) => [...prev, { role: "assistant", content: errorMsg }]);
     } finally {
@@ -109,7 +146,7 @@ const Chatbot = () => {
             </div>
             <div>
               <h3 className="font-semibold">Fortune AI</h3>
-              <p className="text-xs text-muted-foreground">Online</p>
+              <p className="text-xs text-muted-foreground">Online • {modelName}</p>
             </div>
           </div>
 
