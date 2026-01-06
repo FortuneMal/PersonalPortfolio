@@ -6,8 +6,9 @@ import { MessageCircle, X, Send, Bot, User, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Initialize Gemini API (Ensure your API key is in your .env file)
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+// Initialize Gemini API
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const genAI = new GoogleGenerativeAI(API_KEY || "");
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,6 @@ const Chatbot = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Helper to trigger navigation based on AI response keywords
   const handleNavigation = (text) => {
     const lowerText = text.toLowerCase();
     if (lowerText.includes("/projects")) navigate("/projects");
@@ -39,42 +39,55 @@ const Chatbot = () => {
     if (lowerText.includes("/languages")) navigate("/languages");
   };
 
-const handleSend = async () => {
-  if (!input.trim() || isLoading) return;
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
 
-  const userMessage = { role: "user", content: input };
-  setMessages((prev) => [...prev, userMessage]);
-  setInput("");
-  setIsLoading(true);
+    // 1. Safety check for the API key
+    if (!API_KEY) {
+      setMessages((prev) => [...prev, { role: "assistant", content: "Error: API Key is missing. Check Vercel Environment Variables." }]);
+      return;
+    }
 
-  try {
-    const model = genAI.getGenerativeModel({ 
-      model: "gemini-1.5-flash", // Use 1.5 Flash for stability and speed
-      systemInstruction: "You are Fortune Malaza's Portfolio Assistant. Help users navigate. If they ask for projects, use the word /projects; for certificates, use /certificates; for resume, use /resume."
-    });
+    const userMessage = { role: "user", content: input };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
 
-    // We filter the history to ensure it ALWAYS starts with a 'user' message
-    const history = messages
-      .filter((msg, index) => index !== 0) // Skip the hardcoded greeting
-      .map((msg) => ({
-        role: msg.role === "user" ? "user" : "model", // API uses 'model' instead of 'assistant'
-        parts: [{ text: msg.content }],
-      }));
+    try {
+      // 2. Using 'gemini-1.5-flash' - highly compatible with Free Tier
+      const model = genAI.getGenerativeModel({ 
+        model: "gemini-1.5-flash", 
+        systemInstruction: "You are Fortune Malaza's Portfolio Assistant. Fortune is a Software & Cloud Engineer. Help users navigate. If they ask for projects, use /projects; for certificates, use /certificates; for resume, use /resume; for skills, use /languages."
+      });
 
-    const chat = model.startChat({ history });
-    const result = await chat.sendMessage(input);
-    const responseText = await result.response.text();
+      const history = messages
+        .filter((msg, index) => index !== 0) 
+        .map((msg) => ({
+          role: msg.role === "user" ? "user" : "model",
+          parts: [{ text: msg.content }],
+        }));
 
-    setMessages((prev) => [...prev, { role: "assistant", content: responseText }]);
-    setTimeout(() => handleNavigation(responseText), 1000);
+      const chat = model.startChat({ history });
+      const result = await chat.sendMessage(input);
+      const responseText = await result.response.text();
 
-  } catch (error) {
-    console.error("Gemini Error:", error);
-    setMessages((prev) => [...prev, { role: "assistant", content: "Sorry, I hit a snag. Try again?" }]);
-  } finally {
-    setIsLoading(false);
-  }
-};
+      setMessages((prev) => [...prev, { role: "assistant", content: responseText }]);
+      setTimeout(() => handleNavigation(responseText), 1000);
+
+    } catch (error) {
+      console.error("Gemini Detailed Error:", error);
+      
+      // 3. Extracting the real error message for the UI
+      let errorMessage = "Sorry, I hit a snag.";
+      if (error.message?.includes("404")) errorMessage = "Error 404: Model not found. Try changing model to 'gemini-1.5-flash'.";
+      if (error.message?.includes("429")) errorMessage = "I'm a bit overwhelmed! (Rate limit reached). Please wait a minute.";
+      if (error.message?.includes("403")) errorMessage = "Permission Denied: Check if your API key is restricted or invalid.";
+
+      setMessages((prev) => [...prev, { role: "assistant", content: errorMessage }]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") handleSend();
@@ -98,7 +111,7 @@ const handleSend = async () => {
             </div>
             <div>
               <h3 className="font-semibold">Fortune AI</h3>
-              <p className="text-xs text-muted-foreground">Online & Intelligent</p>
+              <p className="text-xs text-muted-foreground">Powered by Gemini</p>
             </div>
           </div>
 
