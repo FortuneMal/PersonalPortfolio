@@ -8,7 +8,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Initialize Gemini API
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-const genAI = new GoogleGenerativeAI(API_KEY || "");
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +56,7 @@ const Chatbot = () => {
     try {
       // 2. Using 'gemini-1.5-flash' - highly compatible with Free Tier
       const model = genAI.getGenerativeModel({ 
-        model: "gemini-1.5-flash", // Use this string exactly
+        model: "gemini-1.5-flash-latest", // Use this string exactly
         systemInstruction: "You are Fortune Malaza's Portfolio Assistant. Fortune is a Software & Cloud Engineer. Help users navigate. If they ask for projects, use /projects; for certificates, use /certificates; for resume, use /resume; for skills, use /languages."
       });
 
