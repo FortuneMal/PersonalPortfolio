@@ -39,53 +39,42 @@ const Chatbot = () => {
     if (lowerText.includes("/languages")) navigate("/languages");
   };
 
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
+const handleSend = async () => {
+  if (!input.trim() || isLoading) return;
 
-    const userMessage = { role: "user", content: input };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
-    setIsLoading(true);
+  const userMessage = { role: "user", content: input };
+  setMessages((prev) => [...prev, userMessage]);
+  setInput("");
+  setIsLoading(true);
 
-    try {
-      // 1. Configure the model with System Instructions
-      const model = genAI.getGenerativeModel({ 
-        model: "gemini-2.0-flash", // Gemini 2.0 Flash is the latest stable high-speed model
-        systemInstruction: `You are Fortune Malaza's Portfolio Assistant. 
-        Fortune is a Software & Cloud Engineer from ALX Africa skilled in JavaScript, Python, and Cloud.
-        If a user asks for:
-        - Projects: mention them and include the secret code "/projects" in your text.
-        - Certificates: include "/certificates".
-        - Resume/CV: include "/resume".
-        - Skills/Tech: include "/languages".
-        Keep responses helpful, professional, and concise. Mention his email fmalaza512@gmail.com if they ask to contact him.`
-      });
+  try {
+    const model = genAI.getGenerativeModel({ 
+      model: "gemini-1.5-flash", // Use 1.5 Flash for stability and speed
+      systemInstruction: "You are Fortune Malaza's Portfolio Assistant. Help users navigate. If they ask for projects, use the word /projects; for certificates, use /certificates; for resume, use /resume."
+    });
 
-      // 2. Map message history for the chat session
-      const history = messages.map((msg) => ({
-        role: msg.role === "user" ? "user" : "model",
+    // We filter the history to ensure it ALWAYS starts with a 'user' message
+    const history = messages
+      .filter((msg, index) => index !== 0) // Skip the hardcoded greeting
+      .map((msg) => ({
+        role: msg.role === "user" ? "user" : "model", // API uses 'model' instead of 'assistant'
         parts: [{ text: msg.content }],
       }));
 
-      const chat = model.startChat({ history });
-      const result = await chat.sendMessage(input);
-      const responseText = await result.response.text();
+    const chat = model.startChat({ history });
+    const result = await chat.sendMessage(input);
+    const responseText = await result.response.text();
 
-      setMessages((prev) => [...prev, { role: "assistant", content: responseText }]);
-      
-      // Handle the automatic redirect if the AI included a path
-      setTimeout(() => handleNavigation(responseText), 1000);
+    setMessages((prev) => [...prev, { role: "assistant", content: responseText }]);
+    setTimeout(() => handleNavigation(responseText), 1000);
 
-    } catch (error) {
-      console.error("Gemini Error:", error);
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: "I'm having trouble connecting to my brain right now. Please try again later!" },
-      ]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  } catch (error) {
+    console.error("Gemini Error:", error);
+    setMessages((prev) => [...prev, { role: "assistant", content: "Sorry, I hit a snag. Try again?" }]);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") handleSend();
