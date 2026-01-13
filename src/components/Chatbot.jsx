@@ -9,12 +9,12 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  // Defaulting to the most compatible model ID
   const [modelName, setModelName] = useState("gemini-1.5-flash-001");
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Hi! I'm Fortune's portfolio assistant. Ask me about projects, certificates, or how to download the resume!",
+      content:
+        "Hi! I'm Fortune's portfolio assistant. Ask me about projects, certificates, or how to download the resume!",
     },
   ]);
   const [input, setInput] = useState("");
@@ -31,23 +31,21 @@ const Chatbot = () => {
     scrollToBottom();
   }, [messages]);
 
-  // SELF-HEALING: Check which models are actually available to this key
+  // Check available models
   useEffect(() => {
     if (!apiKey) return;
     const checkModels = async () => {
       try {
-        // We use the same SDK to fetch the available model list
-        const genAI = new GoogleGenerativeAI(apiKey);
-        // This is a direct fetch to the API to see what's allowed
         const response = await fetch(
           `https://generativelanguage.googleapis.com/v1/models?key=${apiKey}`
         );
         const data = await response.json();
-        
+
         if (data.models) {
-          console.log("✅ AVAILABLE MODELS:", data.models.map(m => m.name));
-          // If the fancy 1.5 flash isn't there, fallback to 'gemini-pro'
-          const hasFlash = data.models.some(m => m.name.includes("gemini-1.5-flash"));
+          console.log("✅ AVAILABLE MODELS:", data.models.map((m) => m.name));
+          const hasFlash = data.models.some((m) =>
+            m.name.includes("gemini-1.5-flash")
+          );
           if (!hasFlash) {
             console.warn("⚠️ 1.5 Flash not found. Falling back to gemini-pro");
             setModelName("gemini-pro");
@@ -72,7 +70,13 @@ const Chatbot = () => {
     if (!input.trim() || isLoading) return;
 
     if (!apiKey) {
-      setMessages((prev) => [...prev, { role: "assistant", content: "⚠️ Error: API Key missing in Vercel. Please redeploy." }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "⚠️ Error: API Key missing in Vercel. Please redeploy.",
+        },
+      ]);
       return;
     }
 
@@ -83,41 +87,33 @@ const Chatbot = () => {
 
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
-      
-      // FIX: Force API version v1 and use specific model ID
-      const model = genAI.getGenerativeModel({ 
-        model: modelName, 
-      }, { apiVersion: 'v1' });
+      const model = genAI.getGenerativeModel({ model: modelName });
 
-      // Configuration for the chat
       const chat = model.startChat({
-        history: messages
-          .filter((msg, index) => index !== 0)
-          .map((msg) => ({
-            role: msg.role === "user" ? "user" : "model",
-            parts: [{ text: msg.content }],
-          })),
-        generationConfig: {
-          maxOutputTokens: 500,
-        },
-        systemInstruction: {
-          role: "system",
-          parts: [{ text: "You are Fortune Malaza's Portfolio Assistant. Help users navigate. If they ask for projects, use /projects; for certificates, use /certificates; for resume, use /resume; for skills, use /languages." }]
-        }
+        history: messages.map((msg) => ({
+          role: msg.role,
+          parts: [{ text: msg.content }],
+        })),
+        generationConfig: { maxOutputTokens: 500 },
+        systemInstruction:
+          "You are Fortune Malaza's Portfolio Assistant. Help users navigate. If they ask for projects, use /projects; for certificates, use /certificates; for resume, use /resume; for skills, use /languages.",
       });
 
       const result = await chat.sendMessage(input);
-      const responseText = await result.response.text();
+      const responseText = result.response.text();
 
-      setMessages((prev) => [...prev, { role: "assistant", content: responseText }]);
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: responseText },
+      ]);
       setTimeout(() => handleNavigation(responseText), 1000);
-
     } catch (error) {
       console.error("Gemini Critical Error:", error);
       let errorMsg = "Sorry, I hit a snag.";
-      if (error.message.includes("404")) errorMsg = `Error: Model '${modelName}' not found. Check console for available list.`;
-      if (error.message.includes("403")) errorMsg = "Error: API Key is valid but restricted. Check Google AI Studio.";
-      
+      if (error.message?.includes("404"))
+        errorMsg = `Error: Model '${modelName}' not found.`;
+      if (error.message?.includes("403"))
+        errorMsg = "Error: API Key is valid but restricted.";
       setMessages((prev) => [...prev, { role: "assistant", content: errorMsg }]);
     } finally {
       setIsLoading(false);
@@ -152,11 +148,30 @@ const Chatbot = () => {
 
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.map((message, index) => (
-              <div key={index} className={`flex gap-2 ${message.role === "user" ? "flex-row-reverse" : ""}`}>
-                <div className={`p-2 h-8 w-8 rounded-full flex items-center justify-center ${message.role === "user" ? "bg-primary/20" : "bg-secondary"}`}>
-                  {message.role === "user" ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4 text-primary" />}
+              <div
+                key={index}
+                className={`flex gap-2 ${
+                  message.role === "user" ? "flex-row-reverse" : ""
+                }`}
+              >
+                <div
+                  className={`p-2 h-8 w-8 rounded-full flex items-center justify-center ${
+                    message.role === "user" ? "bg-primary/20" : "bg-secondary"
+                  }`}
+                >
+                  {message.role === "user" ? (
+                    <User className="w-4 h-4" />
+                  ) : (
+                    <Bot className="w-4 h-4 text-primary" />
+                  )}
                 </div>
-                <div className={`max-w-[75%] p-3 rounded-2xl text-sm ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-secondary"}`}>
+                <div
+                  className={`max-w-[75%] p-3 rounded-2xl text-sm ${
+                    message.role === "user"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-secondary"
+                  }`}
+                >
                   <p className="whitespace-pre-line">{message.content}</p>
                 </div>
               </div>
