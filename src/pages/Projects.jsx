@@ -11,7 +11,7 @@ const Projects = () => {
       github: "https://github.com/FortuneMal/BudgetEasev2",
       demo: "https://budget-easev2-git-main-fortunemals-projects.vercel.app/",
     },
-    
+
     {
       title: "MercuryAI",
       description: "MercuryAI is an AI-powered portfolio assistant that helps users generate professional bios, project summaries, and learning reflections for their portfolios. The app features a tabbed interface, tone selection, and persistent storage of generated outputs. It uses Google Gemini for content generation via a secure backend API proxy.",
@@ -25,6 +25,13 @@ const Projects = () => {
       technologies: ["Python", "Streamlit", "Dockerfile", "OpenShift"],
       github: "https://github.com/FortuneMal/Eye-Spend",
       demo: "https://eyespendai.streamlit.app/",
+    },
+    {
+      title: "LifePulse",
+      description: "LifePulse is a high-precision machine learning application designed to assist in the early detection of heart disease.",
+      technologies: ["Python", "Streamlit", "Jupyter Notebook"],
+      github: "https://github.com/FortuneMal/AI-Health",
+      demo: "https://lifepulse.streamlit.app/",
     },
   ];
 
@@ -53,7 +60,7 @@ const Projects = () => {
               <p className="text-muted-foreground mb-4 text-sm">
                 {project.description}
               </p>
-              
+
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.technologies.map((tech) => (
                   <span
