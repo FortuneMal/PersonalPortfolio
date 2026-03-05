@@ -74,5 +74,5 @@ My portfolio follows a **Minimalist & Modern** aesthetic, prioritizing fast perf
 I’m always looking to collaborate on **AI/ML** projects, specifically those involving **Cloud-native** automation or **Data Engineering** challenges.
 
 * **Email:** [fmalaza512@gmail.com]
-* **LinkedIn:** [[[linkedin.com/in/yourprofile]]([https://www.google.com/search?q=https://linkedin.com/in/yourprofile](https://www.linkedin.com/in/mphikeleli-malaza-5b386a253))]
+* **LinkedIn:** [[linkedin.com/in/yourprofile](https://www.linkedin.com/in/mphikeleli-malaza-5b386a253)]
 * **GitHub:** [@FortuneMal]
