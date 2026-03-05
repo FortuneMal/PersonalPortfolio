@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Award, Calendar, ExternalLink, X, FileText, ZoomIn } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 const Certificates = () => {
   const [selectedCert, setSelectedCert] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const certificates = [
     {
@@ -13,7 +15,7 @@ const Certificates = () => {
       date: "2025",
       category: "Agile",
       // Removed "/public" from the start of all paths
-      pdfUrl: "/Agile with Atlassian Jira.pdf", 
+      pdfUrl: "/Agile with Atlassian Jira.pdf",
       link: "#"
     },
     {
@@ -98,6 +100,12 @@ const Certificates = () => {
     },
   ];
 
+  const categories = ["All", ...new Set(certificates.map(cert => cert.category))];
+
+  const filteredCertificates = selectedCategory === "All"
+    ? certificates
+    : certificates.filter(cert => cert.category === selectedCategory);
+
   return (
     <div className="min-h-screen pt-24 pb-16 px-6 bg-background">
       <div className="container mx-auto max-w-6xl">
@@ -110,8 +118,21 @@ const Certificates = () => {
           </p>
         </div>
 
+        <div className="flex flex-wrap gap-2 mb-8 animate-fade-in">
+          {categories.map((category) => (
+            <Button
+              key={category}
+              variant={selectedCategory === category ? "default" : "outline"}
+              onClick={() => setSelectedCategory(category)}
+              className="rounded-full"
+            >
+              {category}
+            </Button>
+          ))}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {certificates.map((cert, index) => (
+          {filteredCertificates.map((cert, index) => (
             <Card
               key={index}
               onClick={() => setSelectedCert(cert)}
@@ -122,7 +143,7 @@ const Certificates = () => {
                 <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
                   <Award className="w-6 h-6 text-primary" />
                 </div>
-                
+
                 <div className="flex-1">
                   <div className="flex items-start justify-between mb-2">
                     <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
@@ -132,11 +153,11 @@ const Certificates = () => {
                       {cert.category}
                     </Badge>
                   </div>
-                  
+
                   <p className="text-muted-foreground mb-3 font-medium">
                     {cert.issuer}
                   </p>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Calendar className="w-4 h-4" />
@@ -155,7 +176,7 @@ const Certificates = () => {
         {/* Certificate Modal */}
         {selectedCert && (
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm animate-in fade-in duration-200">
-            <div 
+            <div
               className="relative bg-card border border-border rounded-2xl max-w-5xl w-full h-[85vh] overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
@@ -171,7 +192,7 @@ const Certificates = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <a 
+                  <a
                     href={selectedCert.pdfUrl}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -180,7 +201,7 @@ const Certificates = () => {
                   >
                     <ExternalLink className="w-5 h-5" />
                   </a>
-                  <button 
+                  <button
                     onClick={() => setSelectedCert(null)}
                     className="p-2 hover:bg-muted rounded-full transition-colors text-muted-foreground hover:text-destructive"
                   >
@@ -200,7 +221,7 @@ const Certificates = () => {
 
               {/* Modal Footer */}
               <div className="p-4 border-t border-border flex justify-center gap-4 bg-muted/30">
-                <button 
+                <button
                   onClick={() => setSelectedCert(null)}
                   className="px-6 py-2.5 rounded-xl border border-border font-semibold hover:bg-muted transition-colors"
                 >

@@ -5,21 +5,24 @@ import { Github, GitCommit, Code2, Activity } from "lucide-react";
 // --- CONFIGURATION ---
 const GITHUB_USERNAME = "FortuneMal";
 // Read token from Vite environment variables (stored in .env file)
-const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN; 
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 const GitHubActivity = () => {
   const [commits, setCommits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // --- PLACEHOLDER FUNCTIONS (Keep these for styling/data structure) ---
-  const contributions = Array(84).fill(0).map(() => Math.floor(Math.random() * 5)); // Keep placeholder contribution data for now
+  // --- DYNAMIC DATA STATE ---
+  const [topLanguages, setTopLanguages] = useState([]);
+  const [contributions, setContributions] = useState(Array(84).fill(0));
+
   const getContributionColor = (level) => {
     const colors = [
-      "bg-secondary", "bg-primary/20", "bg-primary/40", 
+      "bg-secondary", "bg-primary/20", "bg-primary/40",
       "bg-primary/60", "bg-primary",
     ];
-    return colors[level];
+    // Cap level at 4 for the color array
+    return colors[Math.min(level, 4)] || "bg-primary";
   };
 
   // --- API FETCH LOGIC: Get Recent Commits ---
@@ -27,7 +30,7 @@ const GitHubActivity = () => {
     const fetchGitHubData = async () => {
       setLoading(true);
       setError(null);
-      
+
       try {
         // Fetch user repositories (we only care about the first few for recent commits)
         const reposResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=5`, {
@@ -36,14 +39,14 @@ const GitHubActivity = () => {
           },
         });
         const repos = await reposResponse.json();
-        
+
         const commitPromises = repos.map(async (repo) => {
           // Fetch the single most recent commit for each repository
           const commitsResponse = await fetch(repo.commits_url.replace('{/sha}', ''), {
             headers: { Authorization: `token ${GITHUB_TOKEN}` },
           });
           const recentCommit = (await commitsResponse.json())[0];
-          
+
           if (recentCommit) {
             return {
               repo: repo.name,
@@ -58,9 +61,72 @@ const GitHubActivity = () => {
         const allCommits = (await Promise.all(commitPromises)).filter(Boolean);
         setCommits(allCommits);
 
-        // NOTE: For 'Top Languages' and the 'Contribution Graph' data, you would 
-        // need dedicated API calls (like fetching /repos/:repo/languages for each repo).
-        
+        // Fetch User Events to build a realistic contribution graph
+        const eventsResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events?per_page=100`, {
+          headers: { Authorization: `token ${GITHUB_TOKEN}` },
+        });
+        const events = await eventsResponse.json();
+
+        if (Array.isArray(events)) {
+          // Build a map of dates to event counts for the last 84 days
+          const today = new Date();
+          const activityMap = new Map();
+
+          events.forEach(event => {
+            if (event.type === "PushEvent" || event.type === "CreateEvent" || event.type === "PullRequestEvent") {
+              const eventDate = new Date(event.created_at).toISOString().split('T')[0];
+              activityMap.set(eventDate, (activityMap.get(eventDate) || 0) + 1);
+            }
+          });
+
+          // Generate the 84-day array mapping back from today
+          const newContributions = Array(84).fill(0);
+          for (let i = 0; i < 84; i++) {
+            const date = new Date(today);
+            date.setDate(today.getDate() - (83 - i));
+            const dateString = date.toISOString().split('T')[0];
+            const activityCount = activityMap.get(dateString) || 0;
+
+            // Normalize activity count to 0-4 scale for the UI
+            let level = 0;
+            if (activityCount > 0) level = 1;
+            if (activityCount > 2) level = 2;
+            if (activityCount > 4) level = 3;
+            if (activityCount > 6) level = 4;
+
+            newContributions[i] = level;
+          }
+          setContributions(newContributions);
+        }
+
+        // Fetch Top Languages
+        const allLangsResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100`, {
+          headers: { Authorization: `token ${GITHUB_TOKEN}` },
+        });
+        const allRepos = await allLangsResponse.json();
+
+        let languageCounts = {};
+        for (const r of allRepos) {
+          if (r.language) {
+            languageCounts[r.language] = (languageCounts[r.language] || 0) + 1;
+          }
+        }
+
+        const totalReposWithLang = Object.values(languageCounts).reduce((a, b) => a + b, 0);
+        const sortedLanguages = Object.entries(languageCounts)
+          .sort(([, a], [, b]) => b - a)
+          .slice(0, 3)
+          .map(([name, count], index) => {
+            const colors = ["bg-blue-500", "bg-yellow-500", "bg-green-500"];
+            return {
+              name,
+              percentage: Math.round((count / totalReposWithLang) * 100),
+              color: colors[index % colors.length]
+            };
+          });
+
+        setTopLanguages(sortedLanguages);
+
       } catch (err) {
         console.error("Failed to fetch GitHub data:", err);
         setError("Failed to load GitHub activity. Please check console.");
@@ -79,14 +145,8 @@ const GitHubActivity = () => {
       setLoading(false);
     }
   }, []); // Empty dependency array ensures it runs only once on mount
-  
-  // --- PLACEHOLDER DATA (Still required if API calls for other sections are not implemented) ---
-  const topLanguages = [
-    { name: "JavaScript", percentage: 35, color: "bg-blue-500" },
-    { name: "Python", percentage: 25, color: "bg-yellow-500" },
-    { name: "Shell", percentage: 20, color: "bg-green-500" },
-  ];
-  
+
+
 
   return (
     <section className="py-16 px-6">
@@ -100,13 +160,12 @@ const GitHubActivity = () => {
         {error && <p className="text-center text-destructive">{error}</p>}
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          
-          {/* Contributions Graph (Still uses placeholder data) */}
-          <Card className="p-6 border-border bg-card col-span-full lg:col-span-2 card-tilt">
-            {/* ... (rest of contribution graph rendering logic using 'contributions' array) ... */}
+
+          {/* Contributions Graph */}
+          <Card className="p-6 border-border bg-card col-span-full lg:col-span-2 card-tilt group">
             <div className="flex items-center gap-2 mb-4">
-              <Activity className="w-5 h-5 text-primary" />
-              <h3 className="font-semibold text-foreground">Contribution Activity (Placeholder)</h3>
+              <Activity className="w-5 h-5 text-primary group-hover:animate-pulse" />
+              <h3 className="font-semibold text-foreground">Recent Activity (Last 84 Days)</h3>
             </div>
             <div className="overflow-x-auto">
               <div className="grid grid-cols-12 gap-1 min-w-[300px]">
@@ -119,23 +178,23 @@ const GitHubActivity = () => {
                 ))}
               </div>
             </div>
-             <div className="flex items-center justify-end gap-2 mt-4 text-xs text-muted-foreground">
-               <span>Less</span>
-               {[0, 1, 2, 3, 4].map((level) => (
-                 <div
-                   key={level}
-                   className={`w-3 h-3 rounded-sm ${getContributionColor(level)}`}
-                 />
-               ))}
-               <span>More</span>
-             </div>
+            <div className="flex items-center justify-end gap-2 mt-4 text-xs text-muted-foreground">
+              <span>Less</span>
+              {[0, 1, 2, 3, 4].map((level) => (
+                <div
+                  key={level}
+                  className={`w-3 h-3 rounded-sm ${getContributionColor(level)}`}
+                />
+              ))}
+              <span>More</span>
+            </div>
           </Card>
 
-          {/* Top Languages (Still uses placeholder data) */}
+          {/* Top Languages */}
           <Card className="p-6 border-border bg-card card-tilt">
             <div className="flex items-center gap-2 mb-4">
               <Code2 className="w-5 h-5 text-primary" />
-              <h3 className="font-semibold text-foreground">Top Languages (Placeholder)</h3>
+              <h3 className="font-semibold text-foreground">Top Languages</h3>
             </div>
             <div className="space-y-3">
               {topLanguages.map((lang, index) => (
