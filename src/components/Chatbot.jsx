@@ -4,12 +4,11 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { MessageCircle, X, Send, Bot, User, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [modelName, setModelName] = useState("gemini-1.5-flash-001");
+  const [modelName, setModelName] = useState("llama-3.3-70b-versatile");
   const [messages, setMessages] = useState([
     {
       role: "assistant",
@@ -21,7 +20,7 @@ const Chatbot = () => {
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
 
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const apiKey = import.meta.env.VITE_GROQ_API_KEY;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -31,24 +30,24 @@ const Chatbot = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Check available models
+  // Check available models (Optional for Groq, but we can verify API key works)
   useEffect(() => {
     if (!apiKey) return;
     const checkModels = async () => {
       try {
-        const response = await fetch(
-          `https://generativelanguage.googleapis.com/v1/models?key=${apiKey}`
-        );
+        const response = await fetch("https://api.groq.com/openai/v1/models", {
+          headers: {
+            "Authorization": `Bearer ${apiKey}`
+          }
+        });
         const data = await response.json();
 
-        if (data.models) {
-          console.log("✅ AVAILABLE MODELS:", data.models.map((m) => m.name));
-          const hasFlash = data.models.some((m) =>
-            m.name.includes("gemini-1.5-flash")
-          );
-          if (!hasFlash) {
-            console.warn("⚠️ 1.5 Flash not found. Falling back to gemini-pro");
-            setModelName("gemini-pro");
+        if (data.data) {
+          console.log("✅ AVAILABLE MODELS:", data.data.map((m) => m.id));
+          const hasDefault = data.data.some((m) => m.id === "llama-3.3-70b-versatile");
+          if (!hasDefault && data.data.length > 0) {
+            console.warn("⚠️ Default model not found. Falling back to", data.data[0].id);
+            setModelName(data.data[0].id);
           }
         }
       } catch (e) {
@@ -74,33 +73,61 @@ const Chatbot = () => {
         ...prev,
         {
           role: "assistant",
-          content: "⚠️ Error: API Key missing in Vercel. Please redeploy.",
+          content: "⚠️ Error: VITE_GROQ_API_KEY missing in environment variables. Please add it and redeploy.",
         },
       ]);
       return;
     }
 
     const userMessage = { role: "user", content: input };
-    setMessages((prev) => [...prev, userMessage]);
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
     setInput("");
     setIsLoading(true);
 
     try {
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: modelName });
-
-      const chat = model.startChat({
-        history: messages.map((msg) => ({
-          role: msg.role,
-          parts: [{ text: msg.content }],
-        })),
-        generationConfig: { maxOutputTokens: 500 },
-        systemInstruction:
-          "You are Fortune Malaza's Portfolio Assistant. Help users navigate. If they ask for projects, use /projects; for certificates, use /certificates; for resume, use /resume; for skills, use /languages.",
+      const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: modelName,
+          messages: [
+            {
+              role: "system",
+              content: `You are Fortune Malaza's Portfolio Assistant. Your goal is to provide brief, engaging summaries about Fortune's background, projects, skills, and experience when users ask. 
+              
+              ABOUT FORTUNE:
+              - Focuses on Cloud (AWS, IAM, Azure), AI & LLMs (Prompt Engineering, OpenAI APIs), DevOps (Git, CI/CD, Docker), Data (SQL, ETL), and Low-Code (Power Apps, Power BI).
+              
+              PROJECT HIGHLIGHTS:
+              - BudgetEase: Full-stack personal finance app (React, MongoDB, Node.js).
+              - MercuryAI: AI-powered portfolio assistant using Gemini API.
+              - Eye-Spend: AI Expense Guardian predicting risk using Python, Streamlit, and Docker.
+              - LifePulse: ML app for early heart disease detection.
+              - SumAI: Cyberpunk-themed AI news analyst using Groq & Llama 3.
+              
+              INSTRUCTIONS: 
+              Instead of just sending them to a page, briefly list a few relevant highlights or details first. Then, to help them see more details, seamlessly include the relevant navigation command in your response: use '/projects' for projects, '/certificates' for certificates, '/resume' for resume, and '/languages' for skills. Be friendly, concise, and professional.`,
+            },
+            ...newMessages.map((msg) => ({
+              role: msg.role,
+              content: msg.content,
+            }))
+          ],
+          max_tokens: 500,
+        }),
       });
 
-      const result = await chat.sendMessage(input);
-      const responseText = result.response.text();
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error?.message || "Unknown API Error");
+      }
+
+      const responseText = result.choices[0].message.content;
 
       setMessages((prev) => [
         ...prev,
@@ -108,12 +135,12 @@ const Chatbot = () => {
       ]);
       setTimeout(() => handleNavigation(responseText), 1000);
     } catch (error) {
-      console.error("Gemini Critical Error:", error);
-      let errorMsg = "Sorry, I hit a snag.";
+      console.error("Groq Critical Error:", error);
+      let errorMsg = `Sorry, I hit a snag: ${error.message}`;
       if (error.message?.includes("404"))
         errorMsg = `Error: Model '${modelName}' not found.`;
-      if (error.message?.includes("403"))
-        errorMsg = "Error: API Key is valid but restricted.";
+      if (error.message?.includes("401") || error.message?.includes("key"))
+        errorMsg = "Error: API Key is invalid or restricted.";
       setMessages((prev) => [...prev, { role: "assistant", content: errorMsg }]);
     } finally {
       setIsLoading(false);
@@ -150,14 +177,12 @@ const Chatbot = () => {
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={`flex gap-2 ${
-                  message.role === "user" ? "flex-row-reverse" : ""
-                }`}
+                className={`flex gap-2 ${message.role === "user" ? "flex-row-reverse" : ""
+                  }`}
               >
                 <div
-                  className={`p-2 h-8 w-8 rounded-full flex items-center justify-center ${
-                    message.role === "user" ? "bg-primary/20" : "bg-secondary"
-                  }`}
+                  className={`p-2 h-8 w-8 rounded-full flex items-center justify-center ${message.role === "user" ? "bg-primary/20" : "bg-secondary"
+                    }`}
                 >
                   {message.role === "user" ? (
                     <User className="w-4 h-4" />
@@ -166,11 +191,10 @@ const Chatbot = () => {
                   )}
                 </div>
                 <div
-                  className={`max-w-[75%] p-3 rounded-2xl text-sm ${
-                    message.role === "user"
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-secondary"
-                  }`}
+                  className={`max-w-[75%] p-3 rounded-2xl text-sm ${message.role === "user"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary"
+                    }`}
                 >
                   <p className="whitespace-pre-line">{message.content}</p>
                 </div>

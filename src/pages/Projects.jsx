@@ -33,6 +33,13 @@ const Projects = () => {
       github: "https://github.com/FortuneMal/AI-Health",
       demo: "https://lifepulse.streamlit.app/",
     },
+    {
+      title: "SumAI",
+      description: "A cyberpunk-themed AI news analyst powered by Groq & Llama 3 that turns articles into instant summaries, sentiment insights, and audio briefings.",
+      technologies: ["Python", "Gradio", "Groq Llama 3"],
+      github: "https://github.com/FortuneMal/SumAI",
+      demo: "https://huggingface.co/spaces/FortuneMal/SumAI",
+    },
   ];
 
   return (
