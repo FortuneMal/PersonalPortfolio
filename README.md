@@ -1,76 +1,78 @@
-Portfolio Overview
-My portfolio includes the following key sections:
+# AI & Machine Learning Portfolio
 
-Home / Landing Page
-Name & professional title
-Personal brand statement
-Call-to-action buttons (View Projects, Download Resume, Contact Me)
+Welcome to my professional repository. I am a **Machine Learning & Cloud Solutions Developer** focused on building intelligent systems that are scalable, data-driven, and deployment-ready. My work sits at the intersection of **Generative AI** and **Cloud Infrastructure**, ensuring that models don't just work in notebooks, but in the real world.
 
-👤 About Me
-Professional introduction
-Background & strengths
-Career goals within Cloud and AI
-A clean, friendly overview of who I am and what I’m passionate about
+[ View Live Portfolio](https://personal-portfolio-xi-inky-39.vercel.app/) | [LinkedIn](https://www.linkedin.com/in/mphikeleli-malaza-5b386a253)
 
-🛠️ Skills
-A curated list of the tools and technologies I work with:
-Cloud: AWS, IAM, Azure App Services
-AI & LLMs: Prompt engineering, OpenAI APIs, AI automation
-DevOps: Git/GitHub, CI/CD, Docker, automation pipelines
-Data: SQL, ETL workflows, basic analytics
-Low-Code: Power Apps, Power Automate, Power BI
-General Software: JavaScript/TypeScript, Python basics, REST APIs
+---
 
-📁 Project Portfolio
+##  About Me
 
-A detailed showcase of my projects
+I specialize in architecting **AI-powered applications** by leveraging modern LLM frameworks and automation. My approach is grounded in a strong **Data Engineering** foundation—I believe that high-quality AI is only possible through high-quality data pipelines and reliable **Cloud** environments.
 
-Each project contains:
+* **The AI Vision:** Moving beyond simple prompts to build autonomous agents and integrated AI workflows.
+* **The Foundation:** Deep expertise in **AWS/Azure** for hosting and **SQL/ETL** for managing the data lifecycles that fuel ML models.
+* **The Mindset:** An **INFJ** approach to technology—focused on purposeful, high-impact solutions and clear, low-context documentation.
 
-Title
-Short description
-Tools & technologies used
-GitHub repository link
-(Optional) Live demo link
+---
 
-📞 Contact
-Email
-LinkedIn
-GitHub
-Downloadable PDF resume
+##  Technical Ecosystem
 
-🚀 Featured Projects
+| Category | Technologies & Tools |
+| --- | --- |
+| **AI & LLMs** | **Prompt Engineering, OpenAI APIs, AI Automation, Vector Databases, NLP** |
+| **Cloud (The Backbone)** | AWS (IAM, EC2, S3), Azure App Services |
+| **Data Engineering** | SQL, ETL Workflows, Python, Data Analytics |
+| **DevOps** | Git/GitHub, Docker, CI/CD Pipelines, Automation |
+| **Low-Code/BI** | Power Apps, Power Automate, Power BI |
+| **General Development** | JavaScript/TypeScript, Python, REST APIs |
 
-🎨 Design & Branding Principles
+---
 
-My portfolio follows:
+##  AI & ML Project Showcase
 
-A minimal, modern, professional design
-Consistent color palette and typography
-Clean navigation and UX
-Mobile-responsive layout
-Optional professional headshot
-Strong personal brand statement
+###  Featured: [Mercury AI] | *AI Automation & Integration*
 
-🧭 Documentation & Storytelling
-Every project includes:
+* **The Intelligence:** Developed a custom AI interface utilizing **OpenAI APIs** and sophisticated **Prompt Engineering** to handle complex user intents.
+* **The Foundation:** Deployed via **AWS** using serverless architecture to ensure scalability and cost-efficiency.
+* **The Impact:** Automated [Specific Task], reducing manual processing time by [X%].
+* [ Repo Link](https://github.com/FortuneMal/MercuryAI)
 
-What I built
+###  [LifePulse] | *Predictive Analytics & Health Tech*
 
-Why I built it
+* **The Intelligence:** An AI application designed to predict heart disease risk using machine learning classification.
+* **The Foundation:** Built a robust data preprocessing pipeline to handle medical datasets, ensuring high model accuracy.
+* **Stack:** Python, Scikit-Learn, REST APIs.
+* [ Repo Link](https://github.com/FortuneMal/AI-Health)
 
-My specific role and contributions
+###  [Eye-Spend] | *Financial NLP & Risk Assessment*
 
-Challenges faced
+* **The Intelligence:** Uses AI to classify financial transactions and assess spending risk profiles through Natural Language Processing.
+* **The Foundation:** Integrated with **Azure** for database management and secure data handling.
+* [ Repo Link](https://github.com/FortuneMal/Eye-Spend)
 
-Outcomes and lessons learned
+---
 
-This helps employers understand my thinking, not just my code.
+##  The "AI-Ready" Documentation
 
-🔍 Portfolio Validation
+I document every project through a technical lens to show my engineering rigor:
 
-I ensured that the portfolio:
-Accurately represents my technical skills
-Includes working demos, real code, and visuals
-Aligns with my Cloud/AI/DevOps career direction
-Demonstrates real-world, job-ready experience
+1. **Model Logic:** Why I chose specific prompts, parameters (temperature, top-p), or models.
+2. **Data Integrity:** How I handled ETL processes to ensure the AI had clean, relevant context.
+3. **Deployment:** The Cloud and DevOps strategy used to move the project from a local script to a live URL.
+
+---
+
+##  Design & Branding
+
+My portfolio follows a **Minimalist & Modern** aesthetic, prioritizing fast performance and clean UX to demonstrate that I value the user's experience as much as the backend's intelligence.
+
+---
+
+##  Connect with Me
+
+I’m always looking to collaborate on **AI/ML** projects, specifically those involving **Cloud-native** automation or **Data Engineering** challenges.
+
+* **Email:** [fmalaza512@gmail.com]
+* **LinkedIn:** [[[linkedin.com/in/yourprofile]]([https://www.google.com/search?q=https://linkedin.com/in/yourprofile](https://www.linkedin.com/in/mphikeleli-malaza-5b386a253))]
+* **GitHub:** [@FortuneMal]
