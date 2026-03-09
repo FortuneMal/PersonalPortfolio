@@ -28,14 +28,14 @@ const Projects = () => {
     },
     {
       title: "LifePulse",
-      description: "LifePulse is a high-precision machine learning application designed to assist in the early detection of heart disease.",
+      description: "LifePulse is a deep learning application designed to predict heart disease risk by analyzing clinical patient data through a custom-trained Artificial Neural Network. Built with TensorFlow and Streamlit, the system achieves a 99.35% test accuracy to assist medical professionals with early diagnostic insights. The platform features an automated preprocessing pipeline for real-time feature scaling and a diagnostic dashboard that translates complex probability scores into clear visual feedback.",
       technologies: ["Python", "Streamlit", "Jupyter Notebook"],
       github: "https://github.com/FortuneMal/AI-Health",
       demo: "https://lifepulse.streamlit.app/",
     },
     {
       title: "SumAI",
-      description: "A cyberpunk-themed AI news analyst powered by Groq & Llama 3 that turns articles into instant summaries, sentiment insights, and audio briefings.",
+      description: "SumAI is a next-generation news analysis platform that summarizes articles and extracts sentiment through a futuristic cyberpunk interface. Built with Python and Gradio, the application leverages the Groq LPU Inference Engine and Llama 3-70b to process long-form content in milliseconds while bypassing ads and paywalls. Key features include a visual sentiment orb for emotional tone mapping, a Neurolink TTS engine for high-fidelity audio conversion, and a multi-protocol translation layer supporting several South African and European languages.",
       technologies: ["Python", "Gradio", "Groq Llama 3"],
       github: "https://github.com/FortuneMal/SumAI",
       demo: "https://huggingface.co/spaces/FortuneMal/SumAI",
