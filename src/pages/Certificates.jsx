@@ -103,7 +103,7 @@ const Certificates = () => {
       issuer: "IBM",
       date: "2026",
       category: "AI Engineering",
-      pdfUrl: "/Deep Learning with Keras and TensorFlow.pdf",
+      pdfUrl: "/Deep Learning with Keras and Tensorflow.pdf",
       link: "#"
     },
     {
