@@ -98,6 +98,102 @@ const Certificates = () => {
       pdfUrl: "/Version Control with Git.pdf",
       link: "#"
     },
+    {
+      title: "Deep Learning with Keras and TensorFlow",
+      issuer: "IBM",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Deep Learning with Keras and TensorFlow.pdf",
+      link: "#"
+    },
+    {
+      title: "Machine Learning with Python",
+      issuer: "IBM",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Machine Learning with Python.pdf",
+      link: "#"
+    },
+    {
+      title: "Gen AI Foundational Models for NLP & Language Understanding",
+      issuer: "IBM",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Gen AI Foundational Models for NLP and Language Understanding.pdf",
+      link: "#"
+    },
+    {
+      title: "Generative AI Advance Fine-Tuning for LLMs",
+      issuer: "IBM",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Generative AI Advance Fine-Tuning for LLMs.pdf",
+      link: "#"
+    },
+    {
+      title: "Generative AI Engineering and Fine-Tuning Transformers",
+      issuer: "IBM",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Generative AI Engineering and Fine-Tuning Transformers.pdf",
+      link: "#"
+    },
+    {
+      title: "Generative AI and LLMs Architecture and Data Preparation",
+      issuer: "IBM",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Generative AI and LLMs Architecture and Data Preparation.pdf",
+      link: "#"
+    },
+    {
+      title: "Generative AI Language Modeling with Transformers",
+      issuer: "IBM",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Generative AI Language Modeling with Transformers.pdf",
+      link: "#"
+    },
+    {
+      title: "Introduction to Deep Learning & Neural Networks with Keras",
+      issuer: "IBM",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Introduction to Deep Learning and Neural Networks with Keras.pdf",
+      link: "#"
+    },
+    {
+      title: "Introduction to Neural Networks and PyTorch",
+      issuer: "IBM",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Introduction to Neural Networks and PyTorch.pdf",
+      link: "#"
+    },
+    {
+      title: "Learn to code with AI",
+      issuer: "Scrimba",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Learn to code with AI.pdf",
+      link: "#"
+    },
+    {
+      title: "Neural Networks and Deep Learning",
+      issuer: "DeepLearning.AI",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Neural Networks and Deep Learning.pdf",
+      link: "#"
+    },
+    {
+      title: "Vibe Coding with GitHub Copilot",
+      issuer: "Scrimba",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Vibe Coding with GitHub Copilot.pdf",
+      link: "#"
+    },
   ];
 
   const categories = ["All", ...new Set(certificates.map(cert => cert.category))];

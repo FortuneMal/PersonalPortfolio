@@ -4,7 +4,7 @@ import { Download, Briefcase, GraduationCap, Award, Code } from "lucide-react";
 
 const Resume = () => {
   // Define the path to your CV PDF file
-  const CV_DOWNLOAD_PATH = "/AI Engineering CV.pdf";
+  const CV_DOWNLOAD_PATH = "/AI.ML Engineering CV.pdf";
 
   const resumeSections = [
     {
@@ -39,10 +39,16 @@ const Resume = () => {
           period: "2022 - Present",
         },
         {
-          title: "Digital Engineering Associate",
+          title: "AI Engineering",
           subtitle: "Internship Program",
           company: "Project Y x Capaciti",
           period: "2025 - Present",
+        },
+        {
+          title: "AI/ML Intern",
+          subtitle: "Internship Program",
+          company: "HeadsUP",
+          period: "2026 - Present",
         },
       ],
     },
@@ -52,7 +58,7 @@ const Resume = () => {
       items: [
         {
           title: "Languages",
-          subtitle: "JavaScript, Python, C/C++, Shell",
+          subtitle: "JavaScript, Python, C/C++, Shell, SQL, HTML, CSS, ",
           period: "",
         },
         {
@@ -91,6 +97,16 @@ const Resume = () => {
           subtitle: "Data Engineering/IBM",
           period: "2025",
         },
+        {
+          title: "Machine Learning with Python",
+          subtitle: "Data Engineering/IBM",
+          period: "2026",
+        },
+        {
+          title: "Generative AI Engineering and Fine-Tuning Transformers",
+          subtitle: "AI Engineering/IBM",
+          period: "2026",
+        },
       ],
     },
   ];
@@ -111,7 +127,7 @@ const Resume = () => {
             className="btn-glow group"
             asChild
           >
-            <a 
+            <a
               href={CV_DOWNLOAD_PATH}
               target="_blank"
               rel="noopener noreferrer"
@@ -174,7 +190,7 @@ const Resume = () => {
             className="btn-glow"
             asChild
           >
-            <a 
+            <a
               href={CV_DOWNLOAD_PATH}
               target="_blank"
               rel="noopener noreferrer"
