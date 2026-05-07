@@ -307,11 +307,11 @@ const Certificates = () => {
       link: "#"
     },
     {
-      title: "Vibe Coding with Cursor",
+      title: "Vibe Coding with Cursor AI",
       issuer: "Scrimba",
       date: "2026",
       category: "AI Engineering",
-      pdfUrl: "/Vibe Coding with Cursor.pdf",
+      pdfUrl: "/Vibe Coding with Cursor AI.pdf",
       link: "#"
     },
   ];
