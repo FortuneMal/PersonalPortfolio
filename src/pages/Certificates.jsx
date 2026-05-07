@@ -194,6 +194,126 @@ const Certificates = () => {
       pdfUrl: "/Vibe Coding with GitHub Copilot.pdf",
       link: "#"
     },
+    {
+      title: "AI Capstone Project with Deep Learning",
+      issuer: "IBM",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/AI Capstone Project with Deep Learning.pdf",
+      link: "#"
+    },
+    {
+      title: "Automating Sales Tasks with Zapier",
+      issuer: "Coursera",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Automating Sales Tasks with Zapier.pdf",
+      link: "#"
+    },
+    {
+      title: "Build Intelligent Agents Using DeepSeek & N8N",
+      issuer: "Board Infinity",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Build Intelligent Agents Using DeepSeek & N8N.pdf",
+      link: "#"
+    },
+    {
+      title: "Convolutional Neural Networks",
+      issuer: "DeepLearning.AI",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Convolutional Neural Networks.pdf",
+      link: "#"
+    },
+    {
+      title: "Deep Learning with PyTorch",
+      issuer: "IBM",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Deep Learning with PyTorch.pdf",
+      link: "#"
+    },
+    {
+      title: "Fundamentals of AI Agents Using RAG and LangChain",
+      issuer: "IBM",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Fundamentals of AI Agents Using RAG and LangChain.pdf",
+      link: "#"
+    },
+    {
+      title: "Improving Deep Neural Networks Hyperparameter Tuning, Regularization and Optimization",
+      issuer: "DeepLearning.AI",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Improving Deep Neural Networks Hyperparameter Tuning, Regularization and Optimization.pdf",
+      link: "#"
+    },
+    {
+      title: "Intro to Model Context Protocol (MCP)",
+      issuer: "Scrimba",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Intro to Model Context Protocol (MCP).pdf",
+      link: "#"
+    },
+    {
+      title: "Make.com for Beginners LinkedIn Post Automation With GPT-4",
+      issuer: "Coursera",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Make.com for Beginners LinkedIn Post Automation With GPT-4.pdf",
+      link: "#"
+    },
+    {
+      title: "Project Generative AI Applications with RAG and LangChain",
+      issuer: "IBM",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Project Generative AI Applications with RAG and LangChain.pdf",
+      link: "#"
+    },
+    {
+      title: "Sequence Models",
+      issuer: "DeepLearning.AI",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Sequence Models.pdf",
+      link: "#"
+    },
+    {
+      title: "Structuring Machine Learning Projects",
+      issuer: "DeepLearning.AI",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Structuring Machine Learning Projects.pdf",
+      link: "#"
+    },
+    {
+      title: "Vibe Coding Fundamentals",
+      issuer: "University of Colorado System",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Vibe Coding Fundamentals.pdf",
+      link: "#"
+    },
+    {
+      title: "Vibe Coding with Claude Code",
+      issuer: "Scrimba",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Vibe Coding with Claude Code.pdf",
+      link: "#"
+    },
+    {
+      title: "Vibe Coding with Cursor",
+      issuer: "Scrimba",
+      date: "2026",
+      category: "AI Engineering",
+      pdfUrl: "/Vibe Coding with Cursor.pdf",
+      link: "#"
+    },
   ];
 
   const categories = ["All", ...new Set(certificates.map(cert => cert.category))];
