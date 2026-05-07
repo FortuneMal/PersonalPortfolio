@@ -1,6 +1,6 @@
 # AI & Machine Learning Portfolio
 
-Welcome to my professional repository. I am a **Machine Learning & Cloud Solutions Developer** focused on building intelligent systems that are scalable, data-driven, and deployment-ready. My work sits at the intersection of **Generative AI** and **Cloud Infrastructure**, ensuring that models don't just work in notebooks, but in the real world.
+Welcome to my professional repository. I am a **AI Engineer and Full Stack Developer** focused on building intelligent systems that are scalable, data-driven, and deployment-ready. My work sits at the intersection of **Generative AI** and **Cloud Infrastructure**, ensuring that models don't just work in notebooks, but in the real world.
 
 [ View Live Portfolio](https://personal-portfolio-xi-inky-39.vercel.app/) | [LinkedIn](https://www.linkedin.com/in/mphikeleli-malaza-5b386a253)
 
