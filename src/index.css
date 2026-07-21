@@ -49,39 +49,39 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 220 26% 6%;
+    --background: 0 0% 5%;
     --foreground: 210 20% 98%;
 
-    --card: 220 24% 10%;
+    --card: 0 0% 8%;
     --card-foreground: 210 20% 98%;
 
-    --popover: 220 26% 8%;
+    --popover: 0 0% 7%;
     --popover-foreground: 210 20% 98%;
 
-    --primary: 193 82% 58%;
-    --primary-foreground: 220 26% 6%;
+    --primary: 210 100% 60%;
+    --primary-foreground: 0 0% 10%;
 
-    --secondary: 240 20% 18%;
+    --secondary: 0 0% 12%;
     --secondary-foreground: 210 20% 98%;
 
-    --muted: 220 20% 15%;
+    --muted: 0 0% 15%;
     --muted-foreground: 215 15% 65%;
 
-    --accent: 193 82% 58%;
-    --accent-foreground: 220 26% 6%;
+    --accent: 210 100% 60%;
+    --accent-foreground: 0 0% 10%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 20% 18%;
-    --input: 220 20% 18%;
-    --ring: 193 82% 58%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 210 100% 60%;
 
     /* Custom Portfolio Colors */
-    --hero-gradient-from: 220 26% 6%;
-    --hero-gradient-to: 240 40% 12%;
-    --glow: 193 100% 70%;
-    --card-hover: 220 24% 12%;
+    --hero-gradient-from: 0 0% 5%;
+    --hero-gradient-to: 0 0% 10%;
+    --glow: 210 100% 60%;
+    --card-hover: 0 0% 12%;
   }
 }
 

@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import SkillCluster from "@/components/SkillCluster";
 
 const Languages = () => {
   const skillCategories = [
@@ -57,16 +58,24 @@ const Languages = () => {
     },
   ];
 
+  // Flatten all skills into a single array for the 3D cluster
+  const allSkills = skillCategories.flatMap(category => category.skills);
+
   return (
-    <div className="min-h-screen pt-24 pb-16 px-6">
+    <div className="min-h-screen pt-24 pb-16 px-6 relative z-10">
       <div className="container mx-auto max-w-6xl">
-        <div className="mb-12 animate-fade-in">
+        <div className="mb-8 animate-fade-in">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
             Skills & Technologies
           </h1>
-          <p className="text-muted-foreground text-lg">
-            Technical expertise across various domains of software engineering.
+          <p className="text-muted-foreground text-lg max-w-2xl">
+            A comprehensive overview of my technical stack. Interact with the 3D cluster below or browse the categorized list.
           </p>
+        </div>
+
+        {/* The 3D Interactive Cluster */}
+        <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <SkillCluster skillsList={allSkills} />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
