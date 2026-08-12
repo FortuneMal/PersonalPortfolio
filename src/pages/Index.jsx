@@ -68,7 +68,7 @@ const Index = () => {
                   className="backdrop-blur-md bg-card/30 border-border hover:bg-primary/10 hover:border-primary transition-all text-foreground"
                   asChild
                 >
-                  <a href="/AI Engineering CV.pdf" target="_blank" rel="noopener noreferrer">
+                  <a href="/MalazaCV.pdf" target="_blank" rel="noopener noreferrer">
                     <Download className="mr-2 w-4 h-4" />
                     Resume
                   </a>

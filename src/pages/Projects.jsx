@@ -42,8 +42,8 @@ const Projects = () => {
     },
     {
       title: "Mzansi Law GPT",
-      description: "Mzansi-Law-GPT is a state-of-the-art South African Legal AI Assistant and automated Contract Compliance Auditor.",
-      technologies: ["Python", "LangChain", "CrewAI", "VectorDB", "Retrieval-Augmented Generation(RAG)"],
+      description: "An AI-powered legal document analysis platform engineered specifically for the South African legal landscape. It uses Retrieval-Augmented Generation (RAG) to query local statutes, precedents, and regulations, making legal research faster, highly accurate, and accessible in plain language.The platform focuses directly on South African legislation, accurately querying texts like the Constitution, POPIA, and CCMA guidelines. Powered by Qdrant vector search, it retrieves relevant acts and precedents within seconds while summarizing complex legal contracts into clear, actionable insights. Built-in privacy guardrails ensure all processed documents remain secure and compliant throughout the workflow.",
+      technologies: ["Python", "LangChain", "CrewAI", "VectorDB", "Retrieval-Augmented Generation(RAG)", "Qdrant Cloud"],
       github: "https://github.com/FortuneMal/Mzansi-Law-GPT",
       demo: "https://mzansi-law-gpt.vercel.app/",
     },
