@@ -40,6 +40,13 @@ const Projects = () => {
       github: "https://github.com/FortuneMal/SumAI",
       demo: "https://huggingface.co/spaces/FortuneMal/SumAI",
     },
+    {
+      title: "Mzansi Law GPT",
+      description: "Mzansi-Law-GPT is a state-of-the-art South African Legal AI Assistant and automated Contract Compliance Auditor.",
+      technologies: ["Python", "LangChain", "CrewAI", "VectorDB", "Retrieval-Augmented Generation(RAG)"],
+      github: "https://github.com/FortuneMal/Mzansi-Law-GPT",
+      demo: "https://mzansi-law-gpt.vercel.app/",
+    },
   ];
 
   return (

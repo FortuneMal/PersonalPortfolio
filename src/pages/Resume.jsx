@@ -4,7 +4,7 @@ import { Download, Briefcase, GraduationCap, Award, Code } from "lucide-react";
 
 const Resume = () => {
   // Define the path to your CV PDF file
-  const CV_DOWNLOAD_PATH = "/AI.ML Engineering CV.pdf";
+  const CV_DOWNLOAD_PATH = "/MalazaCV.pdf";
 
   const resumeSections = [
     {
