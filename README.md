@@ -1,26 +1,25 @@
-# AI & Machine Learning Portfolio
+# AI & Software Engineering Portfolio
 
-Welcome to my professional repository. I am a **AI Engineer and Full Stack Developer** focused on building intelligent systems that are scalable, data-driven, and deployment-ready. My work sits at the intersection of **Generative AI** and **Cloud Infrastructure**, ensuring that models don't just work in notebooks, but in the real world.
+Welcome to my professional repository. I am an AI Engineer and Full Stack Developer focused on building intelligent systems that are scalable, data-driven, and deployment-ready. My work sits at the intersection of Generative AI and Cloud Infrastructure, ensuring that models don't just work in notebooks, but in the real world.
 
-[ View Live Portfolio](https://personal-portfolio-xi-inky-39.vercel.app/) | [LinkedIn](https://www.linkedin.com/in/mphikeleli-malaza-5b386a253)
-
----
-
-##  About Me
-
-I specialize in architecting **AI-powered applications** by leveraging modern LLM frameworks and automation. My approach is grounded in a strong **Data Engineering** foundation—I believe that high-quality AI is only possible through high-quality data pipelines and reliable **Cloud** environments.
-
-* **The AI Vision:** Moving beyond simple prompts to build autonomous agents and integrated AI workflows.
-* **The Foundation:** Deep expertise in **AWS/Azure** for hosting and **SQL/ETL** for managing the data lifecycles that fuel ML models.
-* **The Mindset:** An **INFJ** approach to technology—focused on purposeful, high-impact solutions and clear, low-context documentation.
+[View Live Portfolio](https://fortune-personal-portfolio.vercel.app/) | [LinkedIn](https://www.linkedin.com/in/mphikeleli-malaza-5b386a253)
 
 ---
 
-##  Technical Ecosystem
+## About Me
+
+I specialize in architecting AI-powered applications by leveraging modern LLM frameworks and automation. My approach is grounded in a strong Data Engineering foundation — high-quality AI depends on high-quality data pipelines and reliable Cloud environments.
+
+- **The AI Vision:** Moving beyond simple prompts to build autonomous agents and integrated AI workflows.
+- **The Foundation:** Deep expertise in AWS/Azure for hosting and SQL/ETL for managing the data lifecycles that fuel ML models.
+
+---
+
+## Technical Ecosystem
 
 | Category | Technologies & Tools |
 | --- | --- |
-| **AI & LLMs** | **Prompt Engineering, OpenAI APIs, AI Automation, Vector Databases, NLP** |
+| **AI & LLMs** | Prompt Engineering, OpenAI APIs, AI Automation, Vector Databases, NLP |
 | **Cloud (The Backbone)** | AWS (IAM, EC2, S3), Azure App Services |
 | **Data Engineering** | SQL, ETL Workflows, Python, Data Analytics |
 | **DevOps** | Git/GitHub, Docker, CI/CD Pipelines, Automation |
@@ -29,31 +28,39 @@ I specialize in architecting **AI-powered applications** by leveraging modern LL
 
 ---
 
-##  AI & ML Project Showcase
+## AI & ML Project Showcase
 
-###  Featured: [Mercury AI] | *AI Automation & Integration*
+### Mzansi Law GPT | *RAG & Legal AI*
 
-* **The Intelligence:** Developed a custom AI interface utilizing **OpenAI APIs** and sophisticated **Prompt Engineering** to handle complex user intents.
-* **The Foundation:** Deployed via **AWS** using serverless architecture to ensure scalability and cost-efficiency.
-* **The Impact:** Automated [Specific Task], reducing manual processing time by [X%].
-* [ Repo Link](https://github.com/FortuneMal/MercuryAI)
+- An AI-powered legal document analysis platform for South African law, using Retrieval-Augmented Generation over 17 core statutes and landmark case law.
+- Domain-specific contract auditor that checks employment, lease, and consumer contracts against BCEA, POPIA, LRA, and CPA requirements, returning structured findings with recommended redlines.
+- Built with LangChain, Qdrant Cloud vector search, and FastAPI.
+- [Repo Link](https://github.com/FortuneMal/Mzansi-Law-GPT)
 
-###  [LifePulse] | *Predictive Analytics & Health Tech*
+### Agentic Data Governance | *Multi-Agent AI*
 
-* **The Intelligence:** An AI application designed to predict heart disease risk using machine learning classification.
-* **The Foundation:** Built a robust data preprocessing pipeline to handle medical datasets, ensuring high model accuracy.
-* **Stack:** Python, Scikit-Learn, REST APIs.
-* [ Repo Link](https://github.com/FortuneMal/AI-Health)
+- A four-agent CrewAI system that audits datasets for POPIA/GDPR compliance and writes and executes its own Python remediation scripts to clean the data.
+- Includes self-healing code execution: if the AI's generated code fails, the error is fed back to the model so it can rewrite and retry.
+- Deployed as a live FastAPI backend with a Next.js monitoring dashboard.
+- [Repo Link](https://github.com/FortuneMal/agentic-data-governance)
 
-###  [Eye-Spend] | *Financial NLP & Risk Assessment*
+### LifePulse | *Predictive Analytics & Health Tech*
 
-* **The Intelligence:** Uses AI to classify financial transactions and assess spending risk profiles through Natural Language Processing.
-* **The Foundation:** Integrated with **Azure** for database management and secure data handling.
-* [ Repo Link](https://github.com/FortuneMal/Eye-Spend)
+- A neural network trained to predict heart disease risk from clinical data, reaching 99.35% test accuracy.
+- Dual-mode interface for patients and clinicians, with a hybrid rule-based safety net that flags dangerous vitals even when the model itself predicts low risk.
+- Stack: Python, TensorFlow/Keras, Streamlit, Scikit-Learn.
+- [Repo Link](https://github.com/FortuneMal/AI-Health)
+
+### MercuryAI | *AI Portfolio Assistant (Team Project)*
+
+- An AI-powered assistant that generates professional bios, project summaries, and learning reflections, built as part of a four-person team.
+- My role: Frontend Developer, building the tabbed UI, tone selector, and output management screens; the team's backend developers built the secure API proxy to Google Gemini.
+- Deployed on GitHub Pages (frontend) and Render (backend).
+- [Repo Link](https://github.com/FortuneMal/MercuryAI)
 
 ---
 
-##  The "AI-Ready" Documentation
+## The "AI-Ready" Documentation
 
 I document every project through a technical lens to show my engineering rigor:
 
@@ -63,16 +70,16 @@ I document every project through a technical lens to show my engineering rigor:
 
 ---
 
-##  Design & Branding
+## Design & Branding
 
-My portfolio follows a **Minimalist & Modern** aesthetic, prioritizing fast performance and clean UX to demonstrate that I value the user's experience as much as the backend's intelligence.
+My portfolio follows a minimalist, modern aesthetic, prioritizing fast performance and clean UX to demonstrate that I value the user's experience as much as the backend's intelligence.
 
 ---
 
-##  Connect with Me
+## Connect with Me
 
-I’m always looking to collaborate on **AI/ML** projects, specifically those involving **Cloud-native** automation or **Data Engineering** challenges.
+I'm always looking to collaborate on AI/ML projects, specifically those involving Cloud-native automation or Data Engineering challenges.
 
-* **Email:** [fmalaza512@gmail.com]
-* **LinkedIn:** [[Fortune's LinkedIn](https://www.linkedin.com/in/mphikeleli-malaza-5b386a253)]
-* **GitHub:** [@FortuneMal]
+- **Email:** fmalaza512@gmail.com
+- **LinkedIn:** [Fortune's LinkedIn](https://www.linkedin.com/in/mphikeleli-malaza-5b386a253)
+- **GitHub:** [@FortuneMal](https://github.com/FortuneMal)
