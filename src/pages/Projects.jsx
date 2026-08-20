@@ -8,7 +8,7 @@ const Projects = () => {
     {
       title: "BudgetEase",
       description: "BudgetEase is a full-stack personal finance management application designed to help users track expenses, set budgets, and manage savings goals. It provides a clear overview of financial activity, enabling users to make informed decisions about their spending and savings habits.",
-      technologies: ["React", "HTML", "TailwindCSS", "MongoDB", "Node.js"],
+      technologies: ["React", "HTML", "TailwindCSS", "Supabase", "Node.js"],
       github: "https://github.com/FortuneMal/BudgetEasev2",
       demo: "https://budget-easev2-git-main-fortunemals-projects.vercel.app/",
     },
@@ -46,6 +46,19 @@ const Projects = () => {
       technologies: ["Python", "LangChain", "CrewAI", "VectorDB", "Retrieval-Augmented Generation(RAG)", "Qdrant Cloud"],
       github: "https://github.com/FortuneMal/Mzansi-Law-GPT",
       demo: "https://mzansi-law-gpt.vercel.app/",
+    },
+    {
+      title: "Agentic Data Governance",
+      description: "A full-stack, multi-agent AI engine that autonomously audits datasets for privacy compliance (POPIA/GDPR) and executes code to remediate risks. Four CrewAI agents — a Chief Privacy Officer, Data Quality Engineer, Governance Communicator, and Remediation Engineer — collaborate to scan raw CSVs for PII, flag structural issues, and generate an executive summary, with a human-in-the-loop checkpoint before any data mutation. A self-healing code execution layer lets the AI debug and rerun its own remediation scripts on failure, with all audit logs streamed live to a Next.js dashboard via Supabase.",
+      technologies: ["Python", "CrewAI", "Next.js", "Supabase", "Groq (Llama 3.3 70B)"],
+      github: "https://github.com/FortuneMal/agentic-data-governance",
+      demo: "https://agentic-data-governance.vercel.app",
+    },
+    {
+      title: "AI Trading Bot",
+      description: "An autonomous multi-asset trading system that only executes a trade when two independent AI agents agree: a fundamentals agent (Llama 3.3 70B via Groq) reasoning over news and volatility data, and a vision agent (GPT-4o-mini) reading a live-generated candlestick chart for technical patterns. Includes a macro circuit breaker that halts new positions during market-wide drops, automated take-profit/stop-loss exits, and a hindsight agent that re-checks every prediction against real price movement hours later to grade the model's accuracy over time.",
+      technologies: ["Python", "Groq (Llama 3.3 70B)", "OpenAI Vision", "Alpaca API", "Node.js", "Supabase"],
+      github: "https://github.com/FortuneMal/AI-trading",
     },
   ];
 
